@@ -35,3 +35,39 @@ print(X_count.toarray())
 
 print("\nVectorized representation for TF-IDF Vectorizer:")
 print(X_tfidf.toarray())
+
+
+
+
+#SecondBrainVector@gmail.com
+#SecondBrainVector1!
+
+#https://www.pinecone.io/
+
+
+import pinecone
+import pandas as pd
+
+pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
+index = pinecone.Index("test")
+
+
+
+
+
+df = pd.DataFrame(
+    data={
+        "id": ["A", "B", "C", "D"],
+        "vector": [[1., 1., 1.], [1., 2., 3.], [3.,5.,6.], [3.,6.,6.]]
+    })
+df
+
+index.upsert(vectors=zip(df.id, df.vector))  # insert new vectors or update the vector if the id was already created
+
+
+
+
+print(index.query(
+    vector=[3., 5., 5.],
+    top_k=2,
+    include_values=True)) # returns top_k matches
