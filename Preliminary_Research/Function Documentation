@@ -1,7 +1,7 @@
 Using pinecone with langchain for similarity searching
 "https://python.langchain.com/docs/integrations/vectorstores/pinecone"
 
-- There is need for an embedder for the text, possible choices are complex functions availiable from open ai and other companies, or simplier, 
+- There is need for an embedder for the text, possible choices are complex functions availiable from open ai and other companies, or simpler, 
 free functions from scikit learn and other opensource libraries. These are important for capturing sementic meanings of words when vectorizing. There doesnt
 seem to be a built in function for embedding included with langchain.
 
