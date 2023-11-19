@@ -79,7 +79,17 @@ print(index.query(
 
 from langchain.document_loaders import PyPDFLoader
 
+# Load PDF and extract text
 loader = PyPDFLoader("example4.pdf")
 pages = loader.load_and_split()
-
 print(pages)
+
+# Extracted text from the PDF joined into single string
+document_text = ''.join([page.page_content for page in pages])
+
+# Use Sentence Transformers to generate an embedding for the entire document
+model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2')
+document_embedding = model.encode([document_text])
+
+# 'document_embedding' now contains the vector representation of the entire document
+print(document_embedding)
