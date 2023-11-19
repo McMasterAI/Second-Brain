@@ -1,6 +1,12 @@
 Using pinecone with langchain for similarity searching
 "https://python.langchain.com/docs/integrations/vectorstores/pinecone"
 
+- There is need for an embedder for the text, possible choices are complex functions availiable from open ai and other companies, or simplier, 
+free functions from scikit learn and other opensource libraries. These are important for capturing sementic meanings of words when vectorizing. There doesnt
+seem to be a built in function for embedding included with langchain.
+
+- the similarity search is a built in function with pinecone. Cosine is the recommended metric.
+
 Splitting text into tokens using langchain
 "https://python.langchain.com/docs/modules/data_connection/document_transformers/text_splitters/split_by_token"
 
