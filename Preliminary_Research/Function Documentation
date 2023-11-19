@@ -10,3 +10,9 @@ seem to be a built in function for embedding included with langchain.
 Splitting text into tokens using langchain
 "https://python.langchain.com/docs/modules/data_connection/document_transformers/text_splitters/split_by_token"
 
+embedding model used
+https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L6-v2
+
+pdf loading function documentation
+https://python.langchain.com/docs/modules/data_connection/document_loaders/pdf
+
