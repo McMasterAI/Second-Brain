@@ -78,6 +78,7 @@ print(index.query(
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
 
 from langchain.document_loaders import PyPDFLoader
+from sentence_transformers import SentenceTransformer
 
 # Load PDF and extract text
 loader = PyPDFLoader("example4.pdf")
