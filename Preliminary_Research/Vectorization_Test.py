@@ -36,7 +36,7 @@ print(X_count.toarray())
 
 print("\nVectorized representation for TF-IDF Vectorizer:")
 print(X_tfidf.toarray())
-
+"""
 
 
 
@@ -56,18 +56,10 @@ index = pinecone.Index("test")
 
 
 
-df = pd.DataFrame(
-    data={
-        "id": ["A", "B", "C", "D"],
-        "vector": [[1., 1., 1.], [1., 2., 3.], [3.,5.,6.], [3.,6.,6.]]
-    })
-df
-
-index.upsert(vectors=zip(df.id, df.vector))  # insert new vectors or update the vector if the id was already created
 
 
 
-
+""""
 print(index.query(
     vector=[3., 5., 5.],
     top_k=2,
@@ -83,7 +75,6 @@ from sentence_transformers import SentenceTransformer
 # Load PDF and extract text
 loader = PyPDFLoader("example4.pdf")
 pages = loader.load_and_split()
-print(pages)
 
 # Extracted text from the PDF joined into single string
 document_text = ''.join([page.page_content for page in pages])
@@ -94,3 +85,24 @@ document_embedding = model.encode([document_text])
 
 # 'document_embedding' now contains the vector representation of the entire document
 print(document_embedding)
+
+
+flat = document_embedding.flatten()
+
+df = pd.DataFrame(
+    data={
+        "id": ["FirstDoc"],
+        "vector": [[7]]
+    })
+df
+
+index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
+
+
+"""
+index.upsert([("A", [0.1])])
+this works
+
+index.upsert([("A", flat)])
+this doesn't
+"""
