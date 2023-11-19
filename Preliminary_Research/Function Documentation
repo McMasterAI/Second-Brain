@@ -1,0 +1,6 @@
+Using pinecone with langchain for similarity searching
+"https://python.langchain.com/docs/integrations/vectorstores/pinecone"
+
+Splitting text into tokens using langchain
+"https://python.langchain.com/docs/modules/data_connection/document_transformers/text_splitters/split_by_token"
+
