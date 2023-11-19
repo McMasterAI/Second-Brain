@@ -1,3 +1,4 @@
+""""
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from nltk.tokenize import word_tokenize
 
@@ -71,3 +72,14 @@ print(index.query(
     vector=[3., 5., 5.],
     top_k=2,
     include_values=True)) # returns top_k matches
+
+"""
+
+#https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
+
+from langchain.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader("example4.pdf")
+pages = loader.load_and_split()
+
+print(pages)
