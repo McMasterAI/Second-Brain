@@ -1,0 +1,1 @@
+#This file will be used to extract the relevant plain text from the vector database after the similairity search has been performed
