@@ -54,19 +54,6 @@ index = pinecone.Index("test")
 
 
 
-
-
-
-
-
-""""
-print(index.query(
-    vector=[3., 5., 5.],
-    top_k=2,
-    include_values=True)) # returns top_k matches
-
-"""
-
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
 
 from langchain.document_loaders import PyPDFLoader
@@ -87,22 +74,22 @@ document_embedding = model.encode([document_text])
 print(document_embedding)
 
 
-flat = document_embedding.flatten()
+flat = document_embedding.tolist()
+print(flat)
 
 df = pd.DataFrame(
     data={
         "id": ["FirstDoc"],
-        "vector": [[7]]
+        "vector": flat
     })
 df
 
 index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
 
+""""
+print(index.query(
+    vector=[3., 5., 5.],
+    top_k=2,
+    include_values=True)) # returns top_k matches
 
-"""
-index.upsert([("A", [0.1])])
-this works
-
-index.upsert([("A", flat)])
-this doesn't
 """
