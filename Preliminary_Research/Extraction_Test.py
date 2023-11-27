@@ -61,8 +61,6 @@ df
 # Uploads vectors to Pinecone database
 index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
 
-print(len(input_q1))
-
 #return the top 1 value that matches the vector
 return_vectors = index.query(
     vector=[input_q1],

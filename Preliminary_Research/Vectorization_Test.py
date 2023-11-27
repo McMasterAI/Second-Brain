@@ -86,6 +86,8 @@ df
 
 index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
 
+
+
 """"
 print(index.query(
     vector=[3., 5., 5.],
