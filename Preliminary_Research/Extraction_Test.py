@@ -50,36 +50,22 @@ input_ids4 += [0] * (max_len - len(input_ids4))
 input_ids5 += [0] * (max_len - len(input_ids5))
 input_q1 += [0] * (max_len - len(input_q1))
 
-
-# Convert the token IDs to NumPy arrays
-array1 = np.array(input_ids1).reshape(1, -1)  # Add batch dimension
-array2 = np.array(input_ids2).reshape(1, -1)  # Add batch dimension
-array3 = np.array(input_ids3).reshape(1, -1)  # Add batch dimension
-array4 = np.array(input_ids4).reshape(1, -1)  # Add batch dimension
-array5 = np.array(input_ids5).reshape(1, -1)  # Add batch dimension
-qArray1 = np.array(input_q1).reshape(1, -1)  # Add batch dimension
-
-
 # Create lists of vectors and their names
 df = pd.DataFrame(
     data={
         "id": ["array1","array2","array3","array4","array5"],
-        "vector": [array1.flatten().tolist(),array2.flatten().tolist(),array3.flatten().tolist(),array4.flatten().tolist(),array5.flatten().tolist()]
+        "vector": [input_ids1,input_ids2,input_ids3,input_ids4,input_ids5]
     })
 df
 
 # Uploads vectors to Pinecone database
 index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
 
-
-"""
-similarity = cosine_similarity(array1, array2)
-"""
-
+print(len(input_q1))
 
 #return the top 1 value that matches the vector
 return_vectors = index.query(
-    vector=[qArray1.flatten().tolist()],
+    vector=[input_q1],
     top_k=1,
     include_values=True) # returns top_k matches
 
