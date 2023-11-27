@@ -7,13 +7,27 @@ The vectors are also padded with zeros so that they are the same size as each ot
 The similar document can then be converted back to text using the .decode() function.
 """
 
+import pinecone
+import pandas as pd
+
+pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
+index = pinecone.Index("test")
+
 from sklearn.metrics.pairwise import cosine_similarity
 from transformers import GPT2Tokenizer
 import numpy as np
 
+# Get question from user
+question = input("What's your question? ")
+
+
 # Sample sentences
 sentence1 = "In the heart of the bustling city, towering skyscrapers reach towards the sky, their reflective surfaces glistening in the sunlight. Neon lights illuminate the vibrant streets below, where diverse cultures converge. Commuters rush to catch the morning train, creating a symphony of urban energy that defines the city's pulse."
 sentence2 = "The heart of a bustling city"
+sentence3 = "Luigi, Mario, Bowser, Peach, Wario"
+sentence4 = "Classical music is the best genre of music"
+sentence5 = "12345678910"
+
 
 # Load pre-trained GPT2 tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
@@ -21,19 +35,55 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 # Encode the tokens
 input_ids1 = tokenizer.encode(sentence1)
 input_ids2 = tokenizer.encode(sentence2)
+input_ids3 = tokenizer.encode(sentence3)
+input_ids4 = tokenizer.encode(sentence4)
+input_ids5 = tokenizer.encode(sentence5)
+input_q1 = tokenizer.encode(question)
+
 
 # Ensure the same length of input_ids for both sentences
-max_len = max(len(input_ids1), len(input_ids2))
+max_len = max(len(input_ids1), len(input_ids2),len(input_ids3),len(input_ids4),len(input_ids5),len(input_q1))
 input_ids1 += [0] * (max_len - len(input_ids1))
 input_ids2 += [0] * (max_len - len(input_ids2))
+input_ids3 += [0] * (max_len - len(input_ids3))
+input_ids4 += [0] * (max_len - len(input_ids4))
+input_ids5 += [0] * (max_len - len(input_ids5))
+input_q1 += [0] * (max_len - len(input_q1))
+
 
 # Convert the token IDs to NumPy arrays
 array1 = np.array(input_ids1).reshape(1, -1)  # Add batch dimension
 array2 = np.array(input_ids2).reshape(1, -1)  # Add batch dimension
+array3 = np.array(input_ids3).reshape(1, -1)  # Add batch dimension
+array4 = np.array(input_ids4).reshape(1, -1)  # Add batch dimension
+array5 = np.array(input_ids5).reshape(1, -1)  # Add batch dimension
+qArray1 = np.array(input_q1).reshape(1, -1)  # Add batch dimension
 
-# Calculate cosine similarity using NumPy arrays
+
+# Create lists of vectors and their names
+df = pd.DataFrame(
+    data={
+        "id": ["array1","array2","array3","array4","array5"],
+        "vector": [array1.flatten().tolist(),array2.flatten().tolist(),array3.flatten().tolist(),array4.flatten().tolist(),array5.flatten().tolist()]
+    })
+df
+
+# Uploads vectors to Pinecone database
+index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
+
+
+"""
 similarity = cosine_similarity(array1, array2)
+"""
 
-print(f"Similarity between the sentences: {similarity[0, 0]}")
 
-print(tokenizer.decode(input_ids1, skip_special_tokens=True))
+#return the top 1 value that matches the vector
+return_vectors = index.query(
+    vector=[qArray1.flatten().tolist()],
+    top_k=1,
+    include_values=True) # returns top_k matches
+
+print("Return sentence is: ")
+vector = return_vectors['matches'][0]['values']
+
+print(tokenizer.decode(vector))
