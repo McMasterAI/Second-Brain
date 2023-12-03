@@ -23,7 +23,7 @@ def createResponse(payload):
 answer_dict = getAnswer({
 	"inputs": {
 		"question": "What should I study?",
-		"context": "I am good at math, and I am bad at physics."
+		"context": "I am good at math, and I am really bad at physics."
 	},
 })
 
