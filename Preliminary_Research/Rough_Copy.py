@@ -113,3 +113,10 @@ answer_dict = getAnswer({
 answer = answer_dict["answer"]
 print(answer)
 
+response_dict = createResponse({
+	"inputs": "tell me about red pandas",
+})
+
+response = response_dict[0]["generated_text"]
+
+print("\n" + response + "\n")
