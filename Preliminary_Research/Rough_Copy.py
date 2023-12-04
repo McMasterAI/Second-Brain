@@ -79,12 +79,6 @@ vector = return_vectors['matches'][0]['values']
 #returns decoded vector
 return_document = tokenizer.decode(vector)
 
-
-
-
-
-
-
 from huggingface_hub import InferenceClient
 import requests
 
@@ -111,12 +105,26 @@ answer_dict = getAnswer({
 })
 
 answer = answer_dict["answer"]
-print(answer)
+#print(answer)
 
-response_dict = createResponse({
-	"inputs": "tell me about red pandas",
-})
+import openai
 
-response = response_dict[0]["generated_text"]
+# ChatGPT APi Basic Call
+openai.api_key = "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"
 
-print("\n" + response + "\n")
+completion = openai.chat.completions.create(model="gpt-3.5-turbo",
+                                            messages=[
+                                                {"role": "user", "content": "given the context: " + return_document + "answer this question ONLY using the info from the context: " + question}
+                                            ])
+
+print(completion.choices[0].message.content)
+
+
+
+#response_dict = createResponse({
+#	"inputs": "using the context: " + return_document + "Answer about" + question,
+#})
+
+#response = response_dict[0]["generated_text"]
+
+#print("\n" + response + "\n")

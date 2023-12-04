@@ -70,9 +70,9 @@ print(response.generations[0].text)
 """
 
 
-"""
+
 # ChatGPT APi Basic Call
-openai.api_key = "insert api key"
+openai.api_key = "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"
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             messages=[
@@ -80,4 +80,4 @@ completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             ])
 
 print(completion.choices[0].message.content)
-"""
+
