@@ -15,9 +15,6 @@ index = pinecone.Index("test")
 
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
 from langchain.document_loaders import PyPDFLoader
-from sentence_transformers import SentenceTransformer
-
-
 from sklearn.metrics.pairwise import cosine_similarity
 from transformers import GPT2Tokenizer
 import numpy as np
@@ -32,8 +29,6 @@ pages = loader.load_and_split()
 # Extracted text from the PDF joined into single string
 document_text = ''.join([page.page_content for page in pages])
 
-# Use Sentence Transformers to generate an embedding for the entire document
-model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2')
 document_embedding = tokenizer.encode(document_text)
 # 'document_embedding' now contains the vector representation of the entire document
 
