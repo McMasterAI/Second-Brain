@@ -118,13 +118,3 @@ completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             ])
 
 print(completion.choices[0].message.content)
-
-
-
-#response_dict = createResponse({
-#	"inputs": "using the context: " + return_document + "Answer about" + question,
-#})
-
-#response = response_dict[0]["generated_text"]
-
-#print("\n" + response + "\n")
