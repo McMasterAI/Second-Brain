@@ -5,7 +5,6 @@
 
 
 
-
 #uploading pdf 
 import pinecone
 import pandas as pd
