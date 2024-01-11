@@ -10,14 +10,15 @@
 import pinecone
 import pandas as pd
 
-pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
+pinecone.init(api_key="", environment="gcp-starter")
 index = pinecone.Index("test")
 
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
 from langchain.document_loaders import PyPDFLoader
-from sklearn.metrics.pairwise import cosine_similarity
 from transformers import GPT2Tokenizer
 import numpy as np
+
+max_len = 1536
 
 # Load pre-trained GPT2 tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
@@ -26,20 +27,21 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 loader = PyPDFLoader("example4.pdf")
 pages = loader.load_and_split()
 
-# Extracted text from the PDF joined into single string
-document_text = ''.join([page.page_content for page in pages])
+# Embeds each page and adds them to an array
+embedded_pages = [tokenizer.encode(page.page_content) for page in pages]
 
-document_embedding = tokenizer.encode(document_text)
-# 'document_embedding' now contains the vector representation of the entire document
+padded_pages = [(page + [0] * (max_len - len(page))) for page in embedded_pages]
 
 df = pd.DataFrame(
     data={
-        "id": ["FirstDoc"],
-        "vector": [document_embedding]
+        "id": range(1, len(pages) + 1),
+        "vector": padded_pages
     })
 df
 
-index.upsert(vectors=(zip(df.id, df.vector)))  # insert new vectors or update the vector if the id was already created
+data_to_upsert = [(str(row["id"]), row["vector"]) for index, row in df.iterrows()]
+
+index.upsert(vectors=data_to_upsert)  # insert new vectors or update the vector if the id was already created
 
 
 
@@ -58,21 +60,21 @@ input_q1 = tokenizer.encode(question)
 
 
 # Ensure the same length of input_ids for both sentences
-max_len = 3624
 input_q1 += [0] * (max_len - len(input_q1))
 
 #return the top 1 value that matches the vector
 return_vectors = index.query(
-    vector=[input_q1],
-    top_k=1,
+    vector=input_q1,
+    top_k=3,
     include_values=True) # returns top_k matches
 
 
 print("Return sentence is: ")
-vector = return_vectors['matches'][0]['values']
+vector0 = return_vectors['matches'][0]['values']
+vector1 = return_vectors['matches'][1]['values']
+vector2 = return_vectors['matches'][2]['values']
 
-#returns decoded vector
-return_document = tokenizer.decode(vector)
+### UPDATE LLM TO TAKE TOP 3 DOCUMENT PAGES
 
 from huggingface_hub import InferenceClient
 import requests
@@ -105,7 +107,7 @@ answer = answer_dict["answer"]
 import openai
 
 # ChatGPT APi Basic Call
-openai.api_key = "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"
+openai.api_key = ""
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             messages=[
