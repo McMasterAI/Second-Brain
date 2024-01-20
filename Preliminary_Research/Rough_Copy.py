@@ -12,28 +12,34 @@ pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-s
 index = pinecone.Index("test")
 
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
-from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import PyPDFLoader 
 from transformers import GPT2Tokenizer
 import numpy as np
 
+import textract
 max_len = 1536
 
-# Load pre-trained GPT2 tokenizer
+loader = textract.process("example4.pdf")
+text_content = loader.decode("utf-8")  # Decode bytes to string assuming utf-8 encoding
+
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+words = tokenizer.tokenize(tokenizer.decode(tokenizer.encode(text_content)))
 
-# Load PDF and extract text
-loader = PyPDFLoader("example4.pdf")
-pages = loader.load_and_split()
+chunk_size = 350
+word_chunks = [words[i:i + chunk_size] for i in range(0, len(words), chunk_size)]
 
-# Embeds each page and adds them to an array
-embedded_pages = [tokenizer.encode(page.page_content) for page in pages]
+embedded_chunks = [tokenizer.encode(" ".join(chunk)) for chunk in word_chunks]
 
-padded_pages = [(page + [0] * (max_len - len(page))) for page in embedded_pages]
+# Pad the chunks to have the same length
+padded_chunks = [(chunk + [0] * (max_len - len(chunk))) for chunk in embedded_chunks]
+# Now 'padded chunks' contains the embedded and padded chunks of 350 words each
+
+print(padded_chunks)
 
 df = pd.DataFrame(
     data={
-        "id": range(1, len(pages) + 1),
-        "vector": padded_pages
+        "id": range(1, len(word_chunks) + 1),
+        "vector": padded_chunks
     })
 df
 
@@ -72,7 +78,7 @@ print("vector3 = " , vector2)
 import openai
 
 # ChatGPT APi Basic Call
-openai.api_key = "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"
+openai.api_key = ""
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             messages=[
