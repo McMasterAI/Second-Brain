@@ -43,21 +43,11 @@ data_to_upsert = [(str(row["id"]), row["vector"]) for index, row in df.iterrows(
 
 index.upsert(vectors=data_to_upsert)  # insert new vectors or update the vector if the id was already created
 
-
-
-
-
-#asking question,
-
-
-
 # Get question from user
 question = input("What's your question? ")
 
 
-
 input_q1 = tokenizer.encode(question)
-
 
 # Ensure the same length of input_ids for both sentences
 input_q1 += [0] * (max_len - len(input_q1))
@@ -74,35 +64,12 @@ vector0 = return_vectors['matches'][0]['values']
 vector1 = return_vectors['matches'][1]['values']
 vector2 = return_vectors['matches'][2]['values']
 
+print("vector1 = " + vector0)
+print("vector2 = " + vector1)
+print("vector3 = " + vector2)
+
+
 ### UPDATE LLM TO TAKE TOP 3 DOCUMENT PAGES
-
-from huggingface_hub import InferenceClient
-import requests
-
-
-# Made using hugging face 
-API_URL1 = "https://api-inference.huggingface.co/models/tiiuae/falcon-7b-instruct" #falcon-7b model is used for text generation
-API_URL2 = "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2" #roberta-base-squad2 model is used for answering questions
-headers = {"Authorization": "Bearer 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"}
-
-
-def getAnswer(payload):
-	response = requests.post(API_URL2, headers=headers, json=payload) # use the answering questions API to get an answer
-	return response.json()
-
-def createResponse(payload):
-	response = requests.post(API_URL1, headers=headers, json=payload)
-	return response.json()
-	
-answer_dict = getAnswer({
-	"inputs": {
-		"question": question,
-		"context": return_document
-	},
-})
-
-answer = answer_dict["answer"]
-#print(answer)
 
 import openai
 
