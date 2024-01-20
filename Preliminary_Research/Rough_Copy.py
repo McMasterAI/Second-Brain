@@ -4,13 +4,11 @@
 
 
 
-
-
 #uploading pdf 
 import pinecone
 import pandas as pd
 
-pinecone.init(api_key="", environment="gcp-starter")
+pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
 index = pinecone.Index("test")
 
 #https://docs.google.com/document/d/1cS1TBS-nr5zXRfmm3Li3qMA4v6VUxegEmHpRXg7Ru00/edit?usp=sharing
@@ -60,13 +58,13 @@ return_vectors = index.query(
 
 
 print("Return sentence is: ")
-vector0 = return_vectors['matches'][0]['values']
-vector1 = return_vectors['matches'][1]['values']
-vector2 = return_vectors['matches'][2]['values']
+vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values'])).split())
+vector1 = ' '.join(str(tokenizer.decode(return_vectors['matches'][1]['values'])).split())
+vector2 = ' '.join(str(tokenizer.decode(return_vectors['matches'][2]['values'])).split())
 
-print("vector1 = " + vector0)
-print("vector2 = " + vector1)
-print("vector3 = " + vector2)
+print("vector1 = " , vector0)
+print("vector2 = " , vector1)
+print("vector3 = " , vector2)
 
 
 ### UPDATE LLM TO TAKE TOP 3 DOCUMENT PAGES
@@ -74,11 +72,11 @@ print("vector3 = " + vector2)
 import openai
 
 # ChatGPT APi Basic Call
-openai.api_key = ""
+openai.api_key = "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"
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
                                             messages=[
-                                                {"role": "user", "content": "given the context: " + return_document + "answer this question ONLY using the info from the context: " + question}
+                                                {"role": "user", "content": "given the context: " + vector0 + vector1 + vector2 + "answer this question ONLY using the info from the following context if the question cannot be answered with the info return a 'cannot be found': " + question}
                                             ])
 
 print(completion.choices[0].message.content)
