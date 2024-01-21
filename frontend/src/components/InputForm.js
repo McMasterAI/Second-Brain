@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./components.css"
 
 const InputForm = ({ onSubmit }) => {
     const [inputValue, setInputValue] = useState('');
@@ -16,10 +17,9 @@ const InputForm = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>
-                Input:
+           
                 <input type="text" value={inputValue} onChange={handleChange} />
-            </label>
+          
             <button  type="submit">Submit</button>
         </form>
     );

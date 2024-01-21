@@ -3,6 +3,8 @@ import axios from 'axios';
 import InputForm from './components/InputForm';
 import React, { useEffect, useState } from 'react';
 
+import SBlogo from './images/SBLogo.png';
+
 function App() {
 
   // variables
@@ -83,27 +85,38 @@ function App() {
   
   return (
     <div className="App">
+      <div className="top_banner">
+        <img src={SBlogo} alt="logo"></img>
+        <h1>Second Brain for Students</h1>
+      </div>
 
-      <h1>Second Brain for Students</h1>
-      <hr/>
+      <div className="input_section">
+        <InputForm onSubmit={handleFormSubmit} />
+          {(typeof data.response === 'undefined') ? (
+              <p>Loading...</p>
+            ) : (
+              data.response.map((item, i) => (
+                <p key={i}>{item}</p>
+              ))
+            )}
 
-      <InputForm onSubmit={handleFormSubmit} />
-      {(typeof data.response === 'undefined') ? (
-           <p>Loading...</p>
-        ) : (
-          data.response.map((item, i) => (
-            <p key={i}>{item}</p>
-          ))
-        )}
+          <label for="file_upload">
+            Select File
+            <input  id="file_upload" onChange={ (e) => { setFile(e.target.files[0]) }} type = "file"/>
+          </label>
+     
+          <button onClick = { handleUpload}>Upload</button>
 
-
-      <input onChange={ (e) => { setFile(e.target.files[0]) }} type = "file"/>
-      <button onClick = { handleUpload}>Upload</button>
-      { progress.started && <progress max="100" value={progress.pc}></progress>}
-      { msg && <span>{msg}</span>}
+          <div className="upload_content">
+            { progress.started && <progress max="100" value={progress.pc}></progress>}
+            { msg && <span>{msg}</span>}
+          </div>
+          
+      </div>
+      
 
       
-      <hr/>
+    
 
       <h2>Files:</h2>
       {(typeof filenames.response === 'undefined') ? (

@@ -3,36 +3,57 @@
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+img {
+  width: 10vw; 
+  height: 10vw; 
+  
+  justify-self: center;
+  &:hover {
+    transform: scaleX(-1);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+  margin: 0px;
+  align-self: center;
+  justify-self: left;
+  font-size: 5.5vw;
 }
 
-.App-link {
-  color: #61dafb;
+.top_banner {
+  margin: 0px;
+  border-bottom: 3px solid black;
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: 20% 80%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.input_section {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid black;
+}
+
+input[type=file]
+{
+  display: none;
+}
+label{
+  padding: 2vh 3vw; /* Adjust the values as needed */
+  background-color: rgb(60, 95, 255);
+  color: black;
+  cursor: pointer;
+  border-radius: 15px;
+  border-style: none;
+  border: 3px solid black;
+  font-size: 1.3vw;
+  transition: ease background-color 250ms, ease transform 250ms;
+  white-space: nowrap; /* Prevent text from wrapping */
+  &:hover {
+    background-color: rgb(50, 75, 210);
+    transform: scale(1.03);
   }
 }
