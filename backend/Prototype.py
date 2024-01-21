@@ -2,15 +2,16 @@
 #SecondBrainVector1!
 #https://www.pinecone.io/
 
-import pinecone
+from pinecone import Pinecone, ServerlessSpec
 import pandas as pd
-from langchain.document_loaders import PyPDFLoader
 from transformers import GPT2Tokenizer
 import numpy as np
 import textract
 
-pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
-index = pinecone.Index("test")
+pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
+
+
+index = pc.Index("test2")
 
 
 max_len = 1536
