@@ -60,9 +60,9 @@ print("")
 
 df = pd.DataFrame(
     data={
-    "id": range(1, len(word_chunks) + 1),
-    "vector": padded_chunks
-  })
+      "id": range(1, len(word_chunks) + 1),
+      "vector": padded_chunks
+    })
 df
 
 data_to_upsert = [(str(row["id"]), row["vector"]) for index, row in df.iterrows()]
