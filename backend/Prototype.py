@@ -6,6 +6,14 @@ import pandas as pd
 from transformers import GPT2Tokenizer
 import numpy as np
 import textract
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# Access the API key using the environment variable
+openai_api_key = os.getenv("OPENAIKEY")
 
 from pinecone import Pinecone, ServerlessSpec
 
@@ -89,7 +97,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 
 
 import openai
-openai.api_key = "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"
+openai.api_key = openai_api_key
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
