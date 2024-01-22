@@ -2,15 +2,16 @@
 #SecondBrainVector1!
 #https://www.pinecone.io/
 
-import pinecone
 import pandas as pd
-from langchain.document_loaders import PyPDFLoader
 from transformers import GPT2Tokenizer
 import numpy as np
 import textract
 
-pinecone.init(api_key="d489c9e2-5765-423f-ab5a-5da2eabb2d14", environment="gcp-starter")
-index = pinecone.Index("test")
+from pinecone import Pinecone, ServerlessSpec
+
+pc = Pinecone(api_key='6fd9f11a-edeb-4dc5-ab8f-ae7460f361a9')
+
+index = pc.Index("quickstart8")
 
 
 max_len = 1536
@@ -19,23 +20,12 @@ loader = textract.process("exampleDoc.docx")
 
 text_content = loader.decode("utf-8") # Decode bytes to string assuming utf-8 encoding
 
-print("text content")
-print(text_content)
-print("")
-print("")
-print("")
 
 
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 words = text_content.split(" ")
-
-print("words")
-print(words)
-print("")
-print("")
-print("")
 
 
 
@@ -50,24 +40,26 @@ embedded_chunks = [tokenizer.encode(" ".join(chunk)) for chunk in word_chunks]
 padded_chunks = [(chunk + [0] * (max_len - len(chunk))) for chunk in embedded_chunks]
 
 # Now 'padded chunks' contains the embedded and padded chunks of 350 words each
-print("padded chunks")
-print(padded_chunks)
-print("")
-print("")
-print("")
+
 
 
 
 df = pd.DataFrame(
     data={
-      "id": range(1, len(word_chunks) + 1),
-      "vector": padded_chunks
-    })
+    "id": range(1, len(word_chunks) + 1),
+    "vector": padded_chunks
+  })
 df
 
-data_to_upsert = [(str(row["id"]), row["vector"]) for index, row in df.iterrows()]
+
+#dattt = np.array(data_to_upsert[0][1], dtype=float)
+
+data_to_upsert = [(str(row["id"]), np.array(row["vector"], dtype=float)) for index, row in df.iterrows()]
+
 
 index.upsert(vectors=data_to_upsert) # insert new vectors or update the vector if the id was already created
+
+
 
 
 # Get question from user
@@ -79,33 +71,31 @@ input_q1 = tokenizer.encode(question)
 input_q1 += [0] * (max_len - len(input_q1))
 
 
-
 #return the top 1 value that matches the vector
 return_vectors = index.query(
+     namespace="ns1",
      vector=input_q1,
      top_k=3,
      include_values=True) # returns top_k matches
 
 
+
+print(tokenizer.decode(return_vectors['matches'][0]['values']))
+
+
 print("Return sentence is: ")
 vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values'])).split())
-vector1 = ' '.join(str(tokenizer.decode(return_vectors['matches'][1]['values'])).split())
-vector2 = ' '.join(str(tokenizer.decode(return_vectors['matches'][2]['values'])).split())
 
-print("vector0 - ",vector0)
-print("vector1 - ",vector1)
-print("vector2 - ",vector2)
 
 
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
     messages=[
-    {"role": "user", "content": "given the context: " + vector0 + vector1 + vector2 + "answer this question ONLY using the info from the following context if the question cannot be answered with the info return a 'cannot be found': " + question}
+    {"role": "user", "content": "given the context: " + vector0 + "answer this question ONLY!!!! using the info from the following context if the question cannot be answered with the info return a 'cannot be found': " + question}
 ])
 
 
 print(completion.choices[0].message.content)
-
