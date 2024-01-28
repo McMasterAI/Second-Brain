@@ -7,17 +7,17 @@ from transformers import GPT2Tokenizer
 import numpy as np
 import textract
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 # Load environment variables from the .env file
-load_dotenv()
+#load_dotenv()
 
 # Access the API key using the environment variable
 openai_api_key = os.getenv("OPENAIKEY")
 
 from pinecone import Pinecone, ServerlessSpec
 
-pc = Pinecone(api_key='6fd9f11a-edeb-4dc5-ab8f-ae7460f361a9')
+pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
 
 index = pc.Index("test2")
 
