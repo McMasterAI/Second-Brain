@@ -78,18 +78,16 @@ input_q1 = tokenizer.encode(question)
 # Ensure the same length of input_ids for both sentences
 input_q1 += [0] * (max_len - len(input_q1))
 
+print(input_q1)
 
 #return the top 1 value that matches the vector
 return_vectors = index.query(
-     namespace="ns1",
      vector=input_q1,
      top_k=3,
      include_values=True) # returns top_k matches
 
 
-
-print(tokenizer.decode(return_vectors['matches'][0]['values']))
-
+print(return_vectors)
 
 print("Return sentence is: ")
 vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values'])).split())
