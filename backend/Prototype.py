@@ -22,7 +22,7 @@ pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
 index = pc.Index("test2")
 
 
-max_len = 700
+max_len = 450
 
 loader = textract.process("exampleDoc.docx")
 
@@ -95,7 +95,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 
 
 import openai
-openai.api_key = openai_api_key
+openai.api_key = ""
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
