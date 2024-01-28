@@ -19,10 +19,10 @@ from pinecone import Pinecone, ServerlessSpec
 
 pc = Pinecone(api_key='6fd9f11a-edeb-4dc5-ab8f-ae7460f361a9')
 
-index = pc.Index("quickstart8")
+index = pc.Index("test2")
 
 
-max_len = 1536
+max_len = 700
 
 loader = textract.process("exampleDoc.docx")
 
