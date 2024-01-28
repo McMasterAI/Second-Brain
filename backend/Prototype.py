@@ -19,10 +19,10 @@ from pinecone import Pinecone, ServerlessSpec
 
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
 
-index = pc.Index("test2")
+index = pc.Index("test4")
 
 
-max_len = 450
+max_len = 550
 
 loader = textract.process("exampleDoc.docx")
 
@@ -95,7 +95,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 
 
 import openai
-openai.api_key = ""
+openai.api_key = "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"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
