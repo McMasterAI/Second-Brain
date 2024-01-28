@@ -19,10 +19,10 @@ from pinecone import Pinecone, ServerlessSpec
 
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
 
-index = pc.Index("test2")
+index = pc.Index("test4")
 
 
-max_len = 700
+max_len = 550
 
 loader = textract.process("exampleDoc.docx")
 
@@ -78,18 +78,16 @@ input_q1 = tokenizer.encode(question)
 # Ensure the same length of input_ids for both sentences
 input_q1 += [0] * (max_len - len(input_q1))
 
+print(input_q1)
 
 #return the top 1 value that matches the vector
 return_vectors = index.query(
-     namespace="ns1",
      vector=input_q1,
      top_k=3,
      include_values=True) # returns top_k matches
 
 
-
-print(tokenizer.decode(return_vectors['matches'][0]['values']))
-
+print(return_vectors)
 
 print("Return sentence is: ")
 vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values'])).split())
@@ -97,7 +95,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 
 
 import openai
-openai.api_key = openai_api_key
+openai.api_key = "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"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
