@@ -2,6 +2,10 @@
 #SecondBrainVector1!
 #https://www.pinecone.io/
 
+
+#spaces before end of sentence with !
+#change the question from ! to ? 
+
 import pandas as pd
 from transformers import GPT2Tokenizer
 import numpy as np
@@ -79,11 +83,13 @@ index.upsert(vectors=data_to_upsert) # insert new vectors or update the vector i
 question = input("What's your question? ")
 
 input_q1 = tokenizer.encode(question)
+print(input_q1 , " ")
+
 
 # Ensure the same length of input_ids for both sentences
 input_q1 += [0] * (max_len - len(input_q1))
 
-print(input_q1)
+
 
 #return the top 1 value that matches the vector
 return_vectors = index.query(
@@ -92,12 +98,9 @@ return_vectors = index.query(
      include_values=True) # returns top_k matches
 
 
-print(return_vectors)
-
 print("Return sentence is: ")
 vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values'])).split())
-
-
+print(vector0)
 
 import openai
 openai.api_key = "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"
@@ -105,7 +108,7 @@ openai.api_key = "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"
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
     messages=[
-    {"role": "user", "content": "given the context: " + vector0 + "answer this question ONLY!!!! using the info from the following context if the question cannot be answered with the info return a 'cannot be found': " + question}
+    {"role": "user", "content": "you only have this context for information: " + vector0 + "answer this question ONLY!!!! using the info from the following context if the question cannot be answered with the info return a 'cannot be found': " + question}
 ])
 
 
