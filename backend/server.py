@@ -25,7 +25,8 @@ def submit_data():
     input_data = request.json.get('inputValue')
 
     global user_input
-    user_input = print(QandA(input_data))
+    print(QandA(input_data))
+    user_input = QandA(input_data)
 
     get_data()
     return {"response": "POST REQUEST RECEIVED"}
@@ -73,12 +74,12 @@ from pinecone import Pinecone, ServerlessSpec
 
 openai_api_key = os.getenv("OPENAIKEY")
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
-index = pc.Index("batest")
+index = pc.Index("t1")
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 
 def upserting(FileName):
-    max_len = 550
+    max_len = 650
     loader = textract.process(FileName)
     text_content = loader.decode("utf-8")
     words = text_content.split(" ")
@@ -105,7 +106,7 @@ def upserting(FileName):
 
 
 def QandA(Question):
-    max_len = 550
+    max_len = 650
     # Get question from user
     question = Question
 
