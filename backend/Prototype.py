@@ -21,28 +21,33 @@ openai_api_key = os.getenv("OPENAIKEY")
 
 from pinecone import Pinecone, ServerlessSpec
 
-pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')
+pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14') # create a pinecone instance
 
-index = pc.Index("test4")
+index = pc.Index("test4") #creates an index, a data structure for vector embeddings
 
 
 max_len = 550
 
-loader = textract.process("exampleDoc.docx")
+loader = textract.process("exampleDoc.docx")#extracts text from provided document
 
 text_content = loader.decode("utf-8") # Decode bytes to string assuming utf-8 encoding
 
 
 
 
-tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")#using Hugging face's tokenizer
 
-words = text_content.split(" ")
+words = text_content.split(" ")#creates list of individual words from document, split by spaces
 
 
 
 chunk_size = 350
-word_chunks = [words[i:i + chunk_size] for i in range(0, len(words), chunk_size)]
+word_chunks = []
+for i in range(0, len(words), chunk_size):
+    chunk = words[i:i + chunk_size]
+    word_chunks.append(chunk)
+
+#word_chunks = [words[i:i + chunk_size] for i in range(0, len(words), chunk_size)]#put this in for loop form
 
 
 embedded_chunks = [tokenizer.encode(" ".join(chunk)) for chunk in word_chunks]
