@@ -8,7 +8,7 @@ from langchain_openai import OpenAIEmbeddings
 
 
 filepath = "uploads\exampleDoc.docx"
-api_key= "key"
+api_key= "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"
 query = "Which character is a plumber?"
 
 def get_relevant_section(filepath,query,api_key):

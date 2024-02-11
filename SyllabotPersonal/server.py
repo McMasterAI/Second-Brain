@@ -5,7 +5,7 @@ from  storeAndSearch import get_relevant_section
 from LLMCall import get_answer
 
 filepath = "uploads\exampleDoc.docx" #this is hardcoded please change this 
-api_key= "" #insert your own key
+api_key= "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" #insert your own key
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})  # Enable CORS for the specific route
