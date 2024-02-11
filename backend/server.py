@@ -79,11 +79,11 @@ tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 
 
 def upserting(FileName):
-    max_len = 650
+    max_len = 550
     loader = textract.process(FileName)
     text_content = loader.decode("utf-8")
     words = text_content.split(" ")
-    chunk_size = 350
+    chunk_size = 300
     word_chunks = [words[i:i + chunk_size] for i in range(0, len(words), chunk_size)]
     embedded_chunks = [tokenizer.encode(" ".join(chunk)) for chunk in word_chunks]
 
@@ -106,7 +106,7 @@ def upserting(FileName):
 
 
 def QandA(Question):
-    max_len = 650
+    max_len = 550
     # Get question from user
     question = Question
 
