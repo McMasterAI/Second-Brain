@@ -6,6 +6,7 @@
 #spaces before end of sentence with !
 #change the question from ! to ? 
 
+import random
 import pandas as pd
 from transformers import GPT2Tokenizer
 import numpy as np
@@ -28,7 +29,7 @@ index = pc.Index("test4") #creates an index, a data structure for vector embeddi
 
 max_len = 550
 
-loader = textract.process("exampleDoc.docx")#extracts text from provided document
+loader = textract.process("BreakingBad.docx")#extracts text from provided document
 
 text_content = loader.decode("utf-8") # Decode bytes to string assuming utf-8 encoding
 
@@ -41,7 +42,7 @@ words = text_content.split(" ")#creates list of individual words from document, 
 
 
 
-chunk_size = 350
+chunk_size = 290
 word_chunks = []
 for i in range(0, len(words), chunk_size):
     chunk = words[i:i + chunk_size]
@@ -54,7 +55,11 @@ embedded_chunks = [tokenizer.encode(" ".join(chunk)) for chunk in word_chunks]
 
 
 # Pad the chunks to have the same length
-padded_chunks = [(chunk + [0] * (max_len - len(chunk))) for chunk in embedded_chunks]
+padded_chunks = [(chunk + [100] * (max_len - len(chunk))) for chunk in embedded_chunks]
+print("Length padded ", len(padded_chunks[0]))
+print("Length padded ", len(padded_chunks[1]))
+
+
 
 # Now 'padded chunks' contains the embedded and padded chunks of 350 words each
 
@@ -86,8 +91,16 @@ input_q1 = tokenizer.encode(question)
 print(input_q1 , " ")
 
 
+
+
+
+for i in range(max_len - len(input_q1)):
+    input_q1 = input_q1 + [random.randint(1, 200)]
+
+
+
 # Ensure the same length of input_ids for both sentences
-input_q1 += [0] * (max_len - len(input_q1))
+print("QUESTION ",tokenizer.decode(input_q1))
 
 
 
@@ -103,7 +116,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 print(vector0)
 
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
