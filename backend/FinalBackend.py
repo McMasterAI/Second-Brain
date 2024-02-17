@@ -44,6 +44,7 @@ def UploadFile(filepath,api_key):
     for i, doc in enumerate(docs):
         pinecone_index.upsert(vectors=[{"id": str(i), "values": embedded_docs[i], "metadata": {"text_chunk": docs[i].page_content}}])
 
+    #this returns the title you dont actually need to send this back to frontend
     return docs[0].page_content
 
 
@@ -94,6 +95,8 @@ def GetResponse(query, api_key):
     send_back = completion.choices[0].message.content
     print("")
     print("")
+
+    # send_back is the final answer!
     return send_back
 
 print("RESPONSE: ",GetResponse(query, api_key))
