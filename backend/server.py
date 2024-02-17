@@ -21,20 +21,15 @@ def submit_data():
 
     # Process the file as needed (e.g., save it to a folder)
 
-    api_key = "sk-"  # insert your own key
-    relevant_section = GetResponse(query, api_key)  # see storeAndSearch.py for more details
-    answer = " Answer from the backend "  # see LLMCall.py for more details
+    api_key = "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"  # insert your own key
+    relevant_section,answer = GetResponse(query, api_key)  # see storeAndSearch.py for more details
     print(relevant_section)
-    response = ""
-    for chunk in relevant_section:
-        response += chunk["text_chunk"]
-    print(response)
-    return jsonify({"relevantSection": "relevant section", "answer": answer})  # send this info to the frontend
+    return jsonify({"relevantSection": relevant_section, "answer": answer})  # send this info to the frontend
    
 
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
-    api_key = "sk-"
+    api_key = "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"
     go = True
     i = 0
     while go:

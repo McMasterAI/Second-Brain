@@ -12,7 +12,7 @@ import openai
 
 
 filepath = os.path.join("uploads/MarioFacts2.pdf")
-api_key= "sk-"
+api_key= "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"
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')  # create a Pinecone instance
 pinecone_index = pc.Index("iaintest3")
 
@@ -96,7 +96,7 @@ def GetResponse(query, api_key):
     print("")
 
     # send_back is the final answer!
-    return send_back
+    return gpt_send,send_back
 
 print("RESPONSE: ",GetResponse(query, api_key))
 
