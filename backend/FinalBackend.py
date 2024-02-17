@@ -11,10 +11,10 @@ import openai
 
 
 
-filepath = "uploads/MarioFacts.pdf"
-api_key= "sk-"
+filepath = "uploads/MarioFacts2.pdf"
+api_key= "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"
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')  # create a Pinecone instance
-pinecone_index = pc.Index("iaintest2")
+pinecone_index = pc.Index("iaintest3")
 
 
 
@@ -38,10 +38,10 @@ def UploadFile(filepath,api_key):
     embeddings = OpenAIEmbeddings(openai_api_key=api_key)
  
     doc_contents = [doc.page_content for doc in docs]
+    print(doc_contents)
 
     embedded_docs = embeddings.embed_documents(doc_contents)
     for i, doc in enumerate(docs):
-
         pinecone_index.upsert(vectors=[{"id": str(i), "values": embedded_docs[i], "metadata": {"text_chunk": docs[i].page_content}}])
 
     return docs[0].page_content
@@ -49,7 +49,9 @@ def UploadFile(filepath,api_key):
 
 
 
-UploadFile(filepath,api_key)
+print("Uploaded?",UploadFile(filepath,api_key))
+print("space")
+print("space")
 
 
 
@@ -60,9 +62,7 @@ UploadFile(filepath,api_key)
 
 
 
-query = "Which character is bowser?"
-pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')  
-pinecone_index = pc.Index("iaintest2")
+query = "Which character is luigi?"
 
 def GetResponse(query, api_key):
     embeddings = OpenAIEmbeddings(openai_api_key=api_key)
@@ -80,7 +80,7 @@ def GetResponse(query, api_key):
         metadata_list.append(metadata)
 
     gpt_send = metadata_list[0]['text_chunk']
-
+    print("GPT !!!!!!!!!!!!!!!!!",gpt_send)
 
     openai.api_key = api_key
 
@@ -96,6 +96,6 @@ def GetResponse(query, api_key):
     print("")
     return send_back
 
-#print(GetResponse(query, api_key))
+print("RESPONSE: ",GetResponse(query, api_key))
 
 
