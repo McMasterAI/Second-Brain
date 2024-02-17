@@ -1,0 +1,508 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --bg-color: #090351;
+  --second-bg-color: #d1d6ff;
+  --text-color: white;
+  --main-color: #2E8B57;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.header {
+  position: fixed;
+  height: 150px;
+  width: 100%;
+  padding: 1rem 9%;
+  /* background-color: rgba(55, 63, 169, 0.468); */
+  /* background: var(--second-bg-color);  */
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.25); */
+  backdrop-filter: blur(10px);
+  align-items: center;
+  display: flex;
+  z-index: 3;
+ 
+}
+
+
+.logo {
+  height: 10vh;
+  margin-right: 1rem; 
+  
+}
+
+
+
+.title {
+  font-size: 3rem;
+  color: rgb(16, 14, 14);
+  font-family: 'Belluccia';
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+  display: flex;
+  align-items: center;
+}
+
+.title:hover {
+  transform: scale(1.1);
+}
+.logo {
+  width: 8vw; 
+  height: 8vw; 
+  
+  justify-self: center;
+  &:hover {
+    transform: scaleX(-1);
+  }
+}
+
+
+.main__container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-self: center;
+  margin:  0 auto;
+  height: 90vh;
+  /* background-color: #141414; */
+  z-index: 1;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 50px;
+
+}
+
+.main__container h1{
+  font-size: 4rem;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+
+}
+
+.main__content h2{
+  font-size: 4rem;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #b721ff 0% , #21d4fd 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+}
+
+.main__content p{
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+
+}
+
+.main__btn{
+  font-size: 1rem;
+  background-image: linear-gradient(to top , #f77062 0% , #fe5196 100%);
+  padding: 14px 32px;
+  border:  none  ;
+  border-radius: 4px;
+  color:#fff;
+  margin-top: 2rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.35s;
+  outline: none;
+
+
+}
+
+.main__btn a {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+}
+
+.main__btn:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #4837ff;
+  transition: all 0.35s;
+  border-radius: 4px;
+}
+
+.main__btn:hover {
+  color: #fff;
+}
+
+.main__btn:hover:after {
+  width: 100%;
+}
+
+.main__img-container {
+  text-align: center;
+}
+
+
+.main__img{
+  height: 80%;
+  width: 80%;
+}
+
+.second{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.a{
+  font-size: 4rem;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+}
+
+.box {
+  height: 60px;
+  width: 20rem;
+  padding-top: 10px;
+  color: black; /* Set the text color to black */
+  padding:10px ;
+  border: 3px solid #ffb199; /* Add border to make the input box visible */
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+
+
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Add margin bottom for spacing */
+  
+  
+}
+
+.text2{
+  font-size: 3rem;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+  padding: 10rem;
+  margin-bottom: 100px;
+}
+
+.uploadButton {
+  margin-top: 10px; /* Adjust top margin for spacing */
+  height: 50px;
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Add border to all divs */
+/* div {
+  border: 2px solid black;
+} */
+
+/* Remove margin from header */
+.header {
+  margin-bottom: 0;
+}
+
+/* Add margin to top of second section */
+.second {
+  margin-top: 50px;
+}
+
+/* Adjust margin and padding for better spacing */
+.uploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  height: 200px;
+
+}
+
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 300px;
+  width: 500px;
+  margin-bottom: 6rem;
+  margin-top: 5rem;
+
+}
+
+.text3{
+  font-size: 3rem;
+  font-size: 4.5rem;
+  color: rgb(16, 14, 14);
+  font-family: 'Belluccia', cursive;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+  padding: 2rem;
+
+}
+
+.Submit_btn{
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  border: 1px solid transparent; /* Make border transparent */
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  height: 100px;
+  width: 150px;
+  font-size: 2rem;
+  transition: transform 0.6s; /* Add transition for smooth animation */
+}
+
+.Submit_btn:hover{
+  transform: scale(1.2);
+}
+
+.main{
+  height :70rem;
+}
+
+
+.customUploadButton {
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  border: 1px solid transparent; /* Make border transparent */
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  height: 100px;
+  width: 200px;
+  font-size: 2rem;
+  transition: transform 0.3s; /* Add transition for smooth animation */
+}
+
+.customUploadButton:hover {
+  transform: scale(1.2); /* Scale the button on hover */
+}
+  
+.uploadButton {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.uploadSection {
+  position: relative;
+  display: inline-block;
+}
+
+.filename{
+  font-size: 2rem;
+  padding: 3rem;
+  margin-left: 100px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.Rel_sec , .Res_sec{
+  font-size: 2rem;
+  padding: 3rem;
+}
+
+.Rel_head , .Res_head{
+  font-size: 3rem;
+  color: rgb(16, 14, 14);
+  font-family: 'Belluccia', cursive;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-color: #ff8177;
+  background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color:transparent;
+  border-bottom:  1px solid white;
+}
+
+.Rel_head:hover{
+  transform: scale(1.05);
+}
+
+.Rel_content ,.Res_content{
+  padding: 3rem;
+
+}
+
+.Rel_box , .Res_box {
+  background-color: rgba(55, 63, 169, 0.468);
+  margin: 2rem;
+  border-radius: 8px;
+  box-shadow: 0px 6px 10px rgb(181, 167, 209); /* Add shadow */
+}
+
+.Rel_box p {
+  margin: 0; /* Remove default margin of the paragraph */
+}
+
+.navbar_main {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end; /* Align items to the right */
+  margin-left: auto; /* Push to the right end */
+  padding-right: 20px; /* Add some padding to prevent sticking to the edge */
+}
+
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #ff8177;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 5rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.dark-theme {
+  background-color: black;
+  color: white; /* You may need to adjust text color for better visibility */
+}
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center; /* Vertically center the toggle */
+  margin-left: auto; /* Push the container to the right */
+}
+
+
+@media (max-width: 767px) {
+  /* Add styles for small screens here */
+  .header {
+    height: auto; /* Adjust header height for smaller screens */
+    padding: 1rem; /* Adjust padding for smaller screens */
+  }
+
+  .title{
+    font-size: 1.5rem;
+  }
+
+  .navbar_main {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
+    justify-content: flex-end; /* Align items to the right */
+    padding-right: 20px; /* Add some padding to prevent sticking to the edge */
+  }
+
+  .text2 {
+    font-size: 2rem; /* Adjust font size for smaller screens */
+    padding: 5rem; /* Adjust padding for smaller screens */
+    margin-bottom: 50px; /* Adjust margin for smaller screens */
+  }
+
+  .inputSection {
+    width: 100%; /* Adjust width for smaller screens */
+  }
+
+  .main__container h1{
+    font-size: 2rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color:transparent;
+  
+  }
+  
+  .main__content h2{
+    font-size: 2rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #b721ff 0% , #21d4fd 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color:transparent;
+}
+}
+/* Media query for screens between 768px and 1024px (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .title{
+    font-size: 2rem;
+  }
+  /* Add styles for medium screens here */
+}
