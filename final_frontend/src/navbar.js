@@ -49,9 +49,9 @@ function Navbar() {
 
   return (
     <div>
-      <i class='bx bx-menu' id = "menu-icon"></i>
-    <nav class="navbar">
-      <a href="#home" class = "active">Home</a>
+      <i className='bx bx-menu' id = "menu-icon"></i>
+    <nav className="navbar">
+      <a href="#home" className = "active">Home</a>
       <a href="#about" >About</a>
       <a href="#skills" >Contact Us</a>
       <a href="#projects" >Legal</a>

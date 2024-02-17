@@ -11,11 +11,10 @@ import openai
 
 
 
-filepath = "uploads/MarioFacts2.pdf"
-api_key= "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"
+filepath = os.path.join("uploads/MarioFacts.pdf")
+api_key= "sk-"
 pc = Pinecone(api_key='d489c9e2-5765-423f-ab5a-5da2eabb2d14')  # create a Pinecone instance
 pinecone_index = pc.Index("iaintest3")
-
 
 
 

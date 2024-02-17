@@ -113,7 +113,7 @@ function App() {
               <button className="main__btn"><a href='#second'>Try Now</a></button>
             </div>
             <div className = "main__img--container">
-              <img class = "main__img" src = {b} alt ="" id =""/>
+              <img className = "main__img" src = {b} alt ="" id =""/>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ function App() {
 
 
   <div className="inputSection">
-    <label className ="text3" htmlFor="userInput">Enter a string :</label>
+    <label className ="text3" htmlFor="userInput">Ask a question:</label>
     <input
       className="box"
       type="text"
@@ -146,17 +146,18 @@ function App() {
 
   
 {/* <h2 onClick={toggleRelevanceSection} >SHOW RELEVENT SECTION </h2> */}
+  
+  {answer && (
+    <div class = 'Res_sec'>
+      <h2  className='Res_head' >Response:</h2>
+      <div className='Res_box' ><p className='Res_content'>{answer}</p></div>
+    </div>
+  )}
   {relevantSection && (
     <div className='Rel_sec'>
       <h2 className='Rel_head' > Relevant Section:</h2> 
       <div className='Rel_box'><p className='Rel_content'>{relevantSection}</p></div>
       
-    </div>
-  )}
-  {answer && (
-    <div class = 'Res_sec'>
-      <h2  className='Res_head' >Response:</h2>
-      <div className='Res_box' ><p className='Res_content'>{answer}</p></div>
     </div>
   )}
 </section>
