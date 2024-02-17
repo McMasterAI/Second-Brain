@@ -116,7 +116,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 print(vector0)
 
 import openai
-openai.api_key = "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"
+openai.api_key = "sk-"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",

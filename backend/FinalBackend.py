@@ -27,12 +27,7 @@ def UploadFile(filepath,api_key):
 
     Document = namedtuple("Document", ["page_content", "metadata"])
     
-    # ogText is getting cleaned 
     ogText = ogText.decode()
-
-    # ogText is getting cleaned 
-    ogText = ogText.replace('*', '').replace('\n', '')
-
 
     document = Document(page_content=ogText, metadata={'source': filepath})
     documents = [document]
@@ -101,6 +96,6 @@ def GetResponse(query, api_key):
     print("")
     return send_back
 
-print(GetResponse(query, "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"))
+#print(GetResponse(query, api_key))
 
 

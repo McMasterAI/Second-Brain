@@ -36,9 +36,7 @@ function App() {
     try {
       const formData = new FormData();
       formData.append('inputValue', userInput);
-      if (selectedFile) {
-        formData.append('file', selectedFile);
-      }
+
 
       const response = await axios.post("http://127.0.0.1:5000/api/submit", formData, {
         headers: {
@@ -99,7 +97,7 @@ function App() {
         <a href="#home" className="title">Second Brain For Students</a>
 
 
-<div className='navbar_main'><Navbar /> {Navbar}</div>
+<div className='navbar_main'><Navbar /></div>
         
 
 
@@ -125,23 +123,10 @@ function App() {
 
       <section className="second" id="second">
         
-  <div className="uploadSection">
-    <label className = "text2" htmlFor="fileInput">Upload a file :</label>
-    <button className="customUploadButton">Choose File</button>
-    
-    <input
-      type="file"
-      id="fileInput"
-      onChange={handleFileChange}
-      className="uploadButton"
-    />
- 
-    <div class = "filename">{selectedFile && <p>Uploaded File: {selectedFile.name}</p>} {/* Display uploaded file name */}</div>
-     
-  </div>
+
   
 
-  <div className='MyDropzone'><MyDropzone onSubmit={handleUpload} /> {MyDropzone}</div> {/* Drag and Drop comonent for Multi-file  */}
+  <div className='MyDropzone'><MyDropzone onSubmit={handleUpload} /> </div> {/* Drag and Drop comonent for Multi-file  */}
 
 
   <div className="inputSection">
@@ -179,7 +164,7 @@ function App() {
 
 {/* <div className='contact_form'><ContactForm /> {Navbar}</div> */}
 
-<div className='Footer_main'><Footer/> {Footer}</div>
+<div className='Footer_main'><Footer/> </div>
 
     </div>
 
