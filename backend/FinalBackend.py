@@ -27,7 +27,12 @@ def UploadFile(filepath,api_key):
 
     Document = namedtuple("Document", ["page_content", "metadata"])
     
+    # ogText is getting cleaned 
     ogText = ogText.decode()
+
+    # ogText is getting cleaned 
+    ogText = ogText.replace('*', '').replace('\n', '')
+
 
     document = Document(page_content=ogText, metadata={'source': filepath})
     documents = [document]
