@@ -27,12 +27,7 @@ def UploadFile(filepath,api_key):
 
     Document = namedtuple("Document", ["page_content", "metadata"])
     
-    # ogText is getting cleaned 
     ogText = ogText.decode()
-
-    # ogText is getting cleaned 
-    ogText = ogText.replace('*', '').replace('\n', '')
-
 
     document = Document(page_content=ogText, metadata={'source': filepath})
     documents = [document]
@@ -75,7 +70,7 @@ def UploadFile(filepath,api_key):
     #     pinecone_index.upsert(vectors=[{"id": str(i), "values": embedded_docs[i], "metadata": {"text_chunk": docs[i].page_content}}])
 
 
-UploadFile(filepath,api_key)
+#UploadFile(filepath,api_key)
 
 
 
@@ -108,6 +103,6 @@ def GetResponse(query, api_key):
     
     return metadata_list
 
-print(GetResponse(query, api_key))
+#print(GetResponse(query, api_key))
 
 
