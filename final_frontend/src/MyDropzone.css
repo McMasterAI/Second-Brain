@@ -1,0 +1,130 @@
+.dragAndDrop {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ff8177;
+    height: 300px;
+    width: 500px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(55, 63, 169, 0.468);
+    margin-left: 6rem;
+    margin-top: 50px ;
+    position: relative;
+  }
+  
+  .Upload_btn {
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+    border: 1px solid transparent; /* Make border transparent */
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    height: 50px;
+    width: 200px;
+    font-size: 2rem;
+    transition: transform 0.4s; /* Add transition for 
+    smooth animation */
+    position: relative;
+    align-items: center;
+    justify-self: center;
+  }
+  
+  .Upload_btn:hover {
+    transform: scale(1.2); /* Scale the button on hover */
+  }
+  
+  .Upload_div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* align-items: center; */
+    padding: 3rem;
+    margin-top: 40px;
+    position: relative;
+    /* margin-left: 50px; */
+  }
+  
+  .Drop_msg{
+    position: relative;
+    font-size: 1.7rem;
+    font-weight: 300;
+  }
+  
+  .Uploaded_content{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  
+  
+  }
+  
+  .Uploaded_content1{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    width: 500px;
+  }
+  
+  .file_name{
+    padding: 0.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    padding-right: 30rem;
+    text-align: center;
+  }
+  
+  .Remove_btn{
+    position: absolute;
+    margin-left: 50px;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+    border: 1px solid transparent; /* Make border transparent */
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    height: 30px;
+    width: 140px;
+    font-size: 1.5rem;
+    transition: transform 0.4s; /* Add transition for smooth animation */
+  }
+  
+  .Remove_btn:hover {
+    transform: scale(1.2); /* Scale the button on hover */
+  }
+  
+  
+  
+  @media (max-width: 767px) {
+    .dragAndDrop {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #ff8177;
+      height: 200px;
+      width: 400px;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: rgba(55, 63, 169, 0.468);
+      margin-left: 6rem;
+      margin-top: 50px ;
+      position: relative;
+    }
+  
+    .Drop_msg{
+      position: relative;
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+  }

@@ -28,59 +28,26 @@ query = "who is princess peach"
 def get_relevant_section(filepath,query,api_key):
  
     loader = UnstructuredWordDocumentLoader(filepath)
-    print("HElo",loader)
-    print("")
+
     ogText = textract.process(filepath)
     print("Doc1.0",ogText)
     print("")
 
-
-
-
-
     from collections import namedtuple
 
-    # Define the Document namedtuple
     Document = namedtuple("Document", ["page_content", "metadata"])
     
-    # reformats it correctly built in python decode
     ogText = ogText.decode()
 
-
-    # Create a single Document object with ogText as page_content
     document = Document(page_content=ogText, metadata={'source': 'uploads/exampleDoc.docx'})
-
-    # Print the Document object
-    print([document])
-    print("")
-    print("")
-    print("")
-
-
-
-
-
-
     documents = [document]
-    print("NO BUENO2.0 ",documents)
-    print("")
-
     text_splitter = CharacterTextSplitter(chunk_size=350, chunk_overlap=20)
-    print("text splitter ",text_splitter)
-    print("")
 
     docs = text_splitter.split_documents(documents)
-    print("DOCS ",docs)
-    print("")
 
     embeddings = OpenAIEmbeddings(openai_api_key=api_key)
     db = FAISS.from_documents(docs, embeddings)
-    print("IMFINE",db)
-    print("")
- 
-   
     docs = db.similarity_search(query)
-    print("FINAL RETURN ",docs)
  
     return docs[0].page_content
  

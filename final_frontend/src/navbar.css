@@ -1,0 +1,89 @@
+.navbar a {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .navbar a:hover,
+  .navbar a.active {
+    color: #ff8177;
+    border-bottom: 1.7px solid #ff8177;
+  }
+  
+  #menu-icon {
+    font-size: 3.6rem;
+    color: white;
+    display: none; 
+    margin-left: 300px;
+  }
+  
+  
+  @media (max-width: 895px) {
+    #menu-icon {
+      display: block; /* Ensure the menu icon is always visible */
+    }
+  
+    .navbar {
+      position: fixed; /* Ensure the navbar sticks to the top */
+      top: 12rem; /* Adjust the top position as needed */
+      left: 0;
+      width: 100%;
+      padding: 1rem 3%;
+      background: #090351;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      display: none; 
+      /* Hide the navbar by default */
+      
+    }
+  
+    .navbar.active {
+      display: block; /* Show the navbar when active */
+    }
+  
+    .navbar a{
+  
+      display: block;
+      font-size: 2rem;
+      margin: 3rem 0;
+      color: white;
+    }
+  
+    /* Other styles for smaller screens */
+  }
+  
+  
+  @media (min-width: 895px) and (max-width: 1024px) {
+    /* Add styles for small screens here */
+    .header {
+      height: auto; /* Adjust header height for smaller screens */
+      padding: 1rem; /* Adjust padding for smaller screens */
+    }
+  
+    .title{
+      font-size: 1rem;
+    }
+  
+  
+    .text2 {
+      font-size: 2rem; /* Adjust font size for smaller screens */
+      padding: 5rem; /* Adjust padding for smaller screens */
+      margin-bottom: 50px; /* Adjust margin for smaller screens */
+    }
+  
+    .inputSection {
+      width: 100%; /* Adjust width for smaller screens */
+    }
+  }
+  
+  /* Media query for screens between 768px and 1024px (e.g., tablets) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    /* Add styles for medium screens here */
+  }
+  
+  /* Media query for screens larger than 1024px (e.g., desktops) */
+  @media (min-width: 1025px) {
+    /* Add styles for large screens here */
+  }

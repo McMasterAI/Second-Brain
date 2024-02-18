@@ -1,0 +1,73 @@
+.contact{
+    background-color: transparent;
+  }
+  
+  .contact h2{
+    margin-bottom: 3rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color:transparent;
+  
+  }
+  
+  .contact form{
+    max-width: 70rem;
+    margin: 1rem auto;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .contact form .input-box{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .contact form .input-box input,
+  .contact form textarea{
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.6em;
+    color: var(--text-color);
+    background-color: rgba(55, 63, 169, 0.468);
+    border-radius: 0.8rem;
+    border: 1.5px solid #ff8177;
+    margin: 1rem 0;
+    resize: none;
+  }
+  
+  
+  .btn{
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background-color: #ff8177;
+    background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
+    background-size: 100%;
+    border-radius: 4rem;
+    font-size:2rem;
+    color: white;
+    /* border: 0.5px solid transparent;  */
+    letter-spacing: 0.1rem;
+    font-weight: 600;
+    transition: 0.3s ease;
+    cursor: pointer; 
+  }
+  
+  .btn:hover{
+    transform: scale(1.1);
+    
+  }
+  .contact form .btn{
+    margin-top:2rem;
+    
+  
+  }
+  
+  .heading{
+    text-align: center;
+    font-size: 6rem;
+  }
