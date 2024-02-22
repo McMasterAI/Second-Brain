@@ -21,7 +21,7 @@ def submit_data():
 
     # Process the file as needed (e.g., save it to a folder)
 
-    api_key = "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"  # insert your own key
+    api_key = "KEYHERE"  # insert your own key
     relevant_section,answer = GetResponse(query, api_key)  # see storeAndSearch.py for more details
     print(relevant_section)
     return jsonify({"relevantSection": relevant_section, "answer": answer})  # send this info to the frontend
@@ -29,7 +29,7 @@ def submit_data():
 
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
-    api_key = "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"
+    api_key = "KEYHERE"
     go = True
     i = 0
     while go:
