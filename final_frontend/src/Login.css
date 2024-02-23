@@ -59,6 +59,8 @@ transition: max-height 0.5s;
 overflow: hidden;
 }
 
+.input-field
+
 input{
   width: 100%;
   background: transparent;
@@ -74,10 +76,23 @@ input{
  scale: 1.5;
 }
 
+.i2{
+  margin-right: 25px;
+  color: #9999;
+  scale: 2;
+  cursor: pointer;
+}
+
 form p{
   text-align: left;
   font-size: 13px;
 
+}
+
+.login_logo{
+  margin: auto;
+  height: 10vh;
+  width: auto;
 }
 
 form p a {
@@ -94,8 +109,10 @@ form p a {
 
 .btn-field button{
   flex-basis: 48%;
-  background: #3c00a0;
-  color: #fff;
+  
+  background:#eaeaea;
+  color: #555;
+  color: #eaeaea;
   height: 40px;
   border-radius: 20px;
   border: 0;
@@ -109,8 +126,8 @@ form p a {
 }
 
 .btn-field button.disabled{
- background:#eaeaea;
- color: #555;
+  background: #3c00a0;
+  color: #fff;
 }
 
 
@@ -130,4 +147,21 @@ form p a {
   cursor: pointer;
   transition: background 1s;
 	margin-bottom: 20px;
+}
+
+.message_styling {
+  color: black;
+  text-align: center;
+}
+
+.spinner2 {
+  align-items: center;
+  margin: auto;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3c00a0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 5rem;
 }
