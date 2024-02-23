@@ -1,0 +1,26 @@
+.container {
+	font-family: 'Courier New', monospace;
+	margin: 20px;
+	margin-bottom: 0px;
+	height: 300px;
+	width: 300px;
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+  align-items: center;
+  text-align: center;
+	color:black;
+	background-color:white;
+	border:#ff8177 3px solid;
+	/*background-image: linear-gradient(to right, #A3BCB6 0%,#3C403D 100%);*/
+	transition: 0.3s ease-in;
+}
+
+.login_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
