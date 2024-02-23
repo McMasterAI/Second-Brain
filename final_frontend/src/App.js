@@ -130,10 +130,18 @@ const App = ({ onLogout }) => {
       value={userInput}
       onChange={(e) => setUserInput(e.target.value)}
     />
-    <button className ="Submit_btn" onClick={handleFormSubmit}>Submit</button>
+    
   </div>
 
-  {loading && <div className="spinner"></div>}
+  {loading ? (
+        <div className="spinner"></div>
+      ) : (
+        <button className ="Submit_btn2" onClick={handleFormSubmit}>Submit</button>
+      )}
+    
+  
+
+  
 
   
 {/* <h2 onClick={toggleRelevanceSection} >SHOW RELEVENT SECTION </h2> */}
