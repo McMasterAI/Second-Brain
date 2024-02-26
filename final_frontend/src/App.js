@@ -8,28 +8,26 @@ import MyDropzone from './MyDropzone.js';
 import Footer from './Footer.js';
 
 
-function App() {
+const App = ({ onLogout }) => {
   const [userInput, setUserInput] = useState('');
   const [relevantSection, setRelevantSection] = useState('');
   const [answer, setAnswer] = useState('');
-  const [selectedFile, setSelectedFile] = useState('');
-  const [showTitle, setShowTitle] = useState(false);
   const [loading, setLoading] = useState(false); // Loading state
-  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     // Set showTitle to true after a delay (e.g., 1 second)
     const timeout = setTimeout(() => {
-      setShowTitle(true);
+     
     }, 1000);
 
     // Clear timeout to prevent memory leaks
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+
+
+
+ 
 
   const handleFormSubmit = async () => {
     setLoading(true); // Set loading state to true when fetching data
@@ -56,15 +54,8 @@ function App() {
     }
   };
 
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-    // You can add logic here to switch between dark and light themes
-  };  
-
   
-  // const toggleRelevanceSection = () => {
-  //   setRelevantSection(!relevantSection);
-  // }; --BUTTON TO DISPLAY RELEVENT SECTION 
+
 
   const handleUpload = (files) => {
  
@@ -97,7 +88,7 @@ function App() {
         <a href="#home" className="title">Second Brain For Students</a>
 
 
-<div className='navbar_main'><Navbar /></div>
+<div className='navbar_main'><Navbar onLogout={onLogout}/></div>
         
 
 
@@ -139,16 +130,24 @@ function App() {
       value={userInput}
       onChange={(e) => setUserInput(e.target.value)}
     />
-    <button className ="Submit_btn" onClick={handleFormSubmit}>Submit</button>
+    
   </div>
 
-  {loading && <div className="spinner"></div>}
+  {loading ? (
+        <div className="spinner"></div>
+      ) : (
+        <button className ="Submit_btn2" onClick={handleFormSubmit}>Submit</button>
+      )}
+    
+  
+
+  
 
   
 {/* <h2 onClick={toggleRelevanceSection} >SHOW RELEVENT SECTION </h2> */}
   
   {answer && (
-    <div class = 'Res_sec'>
+    <div className = 'Res_sec'>
       <h2  className='Res_head' >Response:</h2>
       <div className='Res_box' ><p className='Res_content'>{answer}</p></div>
     </div>

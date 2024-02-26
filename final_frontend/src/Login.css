@@ -1,0 +1,167 @@
+*{
+  margin: 0;
+  padding: 0;
+  /* font-family: 'Poppins' , 'sans-serif'; */
+  font-family: Nunito Sans;
+  box-sizing: border-box;
+}
+
+
+.container{
+  width: 100%;
+  height: 100vh; 
+  background-image: linear-gradient(rgba(0,0,50, 0.8), rgba(0, 0, 50,0.8)), 
+  url('background.png');
+   }
+
+
+.form-box{
+  width: 90%;
+  max-width: 450px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  background: #fff;
+  padding : 50px 60px 70px;
+  text-align: center;
+}
+
+.form-box h1{
+  font-size: 30px;
+  margin-bottom: 60px;
+  color: #3c00a0;
+  position: relative;
+
+}
+
+.form-box h1::after{
+  content: '';
+  width: 30px;
+  height: 4px;
+  border-radius: 3px;
+  background: #3c00a0;
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+
+.input-field{
+background: #eaeaea;
+margin: 15px 0;
+border-radius: 3px;
+display:flex;
+align-items: center;
+max-height: 65px;
+transition: max-height 0.5s;
+overflow: hidden;
+}
+
+.input-field
+
+input{
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 18px 15px;
+}
+
+
+.i{
+ margin-left: 15px;
+ color: #9999;
+ scale: 1.5;
+}
+
+.i2{
+  margin-right: 25px;
+  color: #9999;
+  scale: 2;
+  cursor: pointer;
+}
+
+form p{
+  text-align: left;
+  font-size: 13px;
+
+}
+
+.login_logo{
+  margin: auto;
+  height: 10vh;
+  width: auto;
+}
+
+form p a {
+  text-decoration: none;
+  color: #3c00a0
+}
+
+.btn-field{
+  width: 100%;
+  display: flex;
+	margin-top: 50px;
+  justify-content: space-between;
+}
+
+.btn-field button{
+  flex-basis: 48%;
+  
+  background:#eaeaea;
+  color: #555;
+  color: #eaeaea;
+  height: 40px;
+  border-radius: 20px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: background 1s;
+}
+
+.input-group{
+  height: 250px;
+}
+
+.btn-field button.disabled{
+  background: #3c00a0;
+  color: #fff;
+}
+
+
+.text{
+	color: black;
+}
+
+.main_btn{
+	margin-top: 15px;
+  background: #3c00a0;
+  color: #fff;
+  height: 40px;
+	width: 120px;
+  border-radius: 20px;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  transition: background 1s;
+	margin-bottom: 20px;
+}
+
+.message_styling {
+  color: black;
+  text-align: center;
+}
+
+.spinner2 {
+  align-items: center;
+  margin: auto;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3c00a0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 5rem;
+}

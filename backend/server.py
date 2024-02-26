@@ -6,6 +6,11 @@ from flask_cors import CORS
 import os
 from FinalBackend import UploadFile
 from FinalBackend import GetResponse
+from pinecone import Pinecone
+from langchain_openai import OpenAIEmbeddings
+from authentication import register
+from authentication import checkExisting
+from authentication import checkLoginInfo
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})  # Enable CORS for the specific route
@@ -21,7 +26,7 @@ def submit_data():
 
     # Process the file as needed (e.g., save it to a folder)
 
-    api_key = "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"  # insert your own key
+    api_key = "KEYHERE"  # insert your own key
     relevant_section,answer = GetResponse(query, api_key)  # see storeAndSearch.py for more details
     print(relevant_section)
     return jsonify({"relevantSection": relevant_section, "answer": answer})  # send this info to the frontend
@@ -29,7 +34,7 @@ def submit_data():
 
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
-    api_key = "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"
+    api_key = "KEYHERE"
     go = True
     i = 0
     while go:
@@ -46,5 +51,29 @@ def upload_data():
    
     return jsonify({"reponse": "Files Uploaded"})
 
+@app.route("/api/login", methods=['POST'])
+def check_login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    print(username, password)
+    existing, account = checkLoginInfo(username, password)
+    if (existing == "success"):
+        # do something with the account variable (save it for later)
+        pass
+    print(existing)
+    return jsonify({"message": existing})
+
+@app.route("/api/register", methods=['POST'])
+def register_user():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    print(username, password)
+    existing = checkExisting(username)
+    if existing != "username_error": # if the username is not already in the db
+        register(username, password) # adds the users info to the pinecone db
+    return jsonify({"message": existing})
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+    

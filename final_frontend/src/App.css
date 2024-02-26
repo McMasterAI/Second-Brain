@@ -276,9 +276,9 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  height: 300px;
+  height: 200px;
   width: 500px;
-  margin-bottom: 6rem;
+  margin-bottom: 0px;
   margin-top: 5rem;
 
 }
@@ -287,7 +287,7 @@ body {
   font-size: 3rem;
   font-size: 4.5rem;
   color: rgb(16, 14, 14);
-  font-family: 'Belluccia', cursive;
+  font-family: Nunito Sans;
   cursor: pointer;
   transition: 0.3s ease;
   background-color: #ff8177;
@@ -301,20 +301,21 @@ body {
 
 }
 
-.Submit_btn{
+.Submit_btn2{
   background-color: #ff8177;
   background-image: linear-gradient(to top , #ff0844 0% , #ffb199 100%);
   border: 1px solid transparent; /* Make border transparent */
   border-radius: 4px;
   color: #ffffff;
   cursor: pointer;
-  height: 100px;
+  height: 50px;
   width: 150px;
   font-size: 2rem;
   transition: transform 0.6s; /* Add transition for smooth animation */
+  margin-bottom: 2rem;
 }
 
-.Submit_btn:hover{
+.Submit_btn2:hover{
   transform: scale(1.2);
 }
 
@@ -371,7 +372,7 @@ body {
 .Rel_head , .Res_head{
   font-size: 3rem;
   color: rgb(16, 14, 14);
-  font-family: 'Belluccia', cursive;
+  font-family: Nunito Sans;
   cursor: pointer;
   transition: 0.3s ease;
   background-color: #ff8177;
@@ -384,9 +385,7 @@ body {
   border-bottom:  1px solid white;
 }
 
-.Rel_head:hover{
-  transform: scale(1.05);
-}
+
 
 .Rel_content ,.Res_content{
   padding: 3rem;

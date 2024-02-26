@@ -18,7 +18,7 @@ import os
 #load_dotenv()
 
 # Access the API key using the environment variable
-openai_api_key = os.getenv("OPENAIKEY")
+openai_api_key = os.getenv("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")
 
 from pinecone import Pinecone, ServerlessSpec
 
@@ -116,7 +116,7 @@ vector0 = ' '.join(str(tokenizer.decode(return_vectors['matches'][0]['values']))
 print(vector0)
 
 import openai
-openai.api_key = "sk-"
+openai.api_key = "KEYHERE"
 
 
 completion = openai.chat.completions.create(model="gpt-3.5-turbo",
@@ -126,3 +126,4 @@ completion = openai.chat.completions.create(model="gpt-3.5-turbo",
 
 
 print(completion.choices[0].message.content)
+

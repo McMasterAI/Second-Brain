@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './navbar.css';
+import { BsPersonSquare  } from "react-icons/bs";
 
-function Navbar() {
+const Navbar = ({ onLogout }) => {
+
+  const handleLogout = () => {
+    // Call the logout function passed from the parent component (App)
+    onLogout();
+  };
 
 
   const [activeSection, setActiveSection] = useState(null);
+  const [username, setUsername] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,6 +54,10 @@ function Navbar() {
     };
   }, [activeSection]);
 
+  useEffect(() => {
+    setUsername(localStorage.getItem('authToken'));
+  }, []);
+
   return (
     <div>
       <i className='bx bx-menu' id = "menu-icon"></i>
@@ -54,9 +65,12 @@ function Navbar() {
       <a href="#home" className = "active">Home</a>
       <a href="#about" >About</a>
       <a href="#skills" >Contact Us</a>
-      <a href="#projects" >Legal</a>
-      <a href="#contact" >Etc</a>
+      <a href="#home"><BsPersonSquare /> {username}</a> 
+        <button className="nav_button" onClick={handleLogout}>Logout</button>
+
+      
     </nav>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'/>
     </div>
   );

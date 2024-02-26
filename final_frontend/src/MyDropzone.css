@@ -10,7 +10,6 @@
     cursor: pointer;
     border-radius: 5px;
     background-color: rgba(55, 63, 169, 0.468);
-    margin-left: 6rem;
     margin-top: 50px ;
     position: relative;
   }
@@ -99,7 +98,7 @@
   }
   
   .Remove_btn:hover {
-    transform: scale(1.2); /* Scale the button on hover */
+    transform: scale(1.05); /* Scale the button on hover */
   }
   
   
