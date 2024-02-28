@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Autheticator = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {

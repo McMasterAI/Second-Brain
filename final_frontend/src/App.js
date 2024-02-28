@@ -12,6 +12,7 @@ const App = ({ onLogout }) => {
   const [userInput, setUserInput] = useState('');
   const [relevantSection, setRelevantSection] = useState('');
   const [answer, setAnswer] = useState('');
+  const [response, setResponse] = useState(null);
   const [loading, setLoading] = useState(false); // Loading state
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const App = ({ onLogout }) => {
   
 
 
-  const handleUpload = (files) => {
+  const handleUpload = async (files) => {
  
     try {
       const formData2 = new FormData();
@@ -69,13 +70,16 @@ const App = ({ onLogout }) => {
         formData2.append(`file${index}`, file); // Appending each file individually
       });
  
-      axios.post("http://127.0.0.1:5000/api/upload", formData2, {
+      const response1 = await axios.post("http://127.0.0.1:5000/api/upload", formData2, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+      
       });
- 
- 
+      
+      setResponse(response1.data.response);
+      console.log(response1.data.response);
+
     } catch (error) {
       console.error('Error submitting input:', error);
     }
@@ -117,7 +121,7 @@ const App = ({ onLogout }) => {
 
   
 
-  <div className='MyDropzone'><MyDropzone onSubmit={handleUpload} /> </div> {/* Drag and Drop comonent for Multi-file  */}
+  <div className='MyDropzone'><MyDropzone onSubmit={handleUpload} response={response} /> </div> {/* Drag and Drop comonent for Multi-file  */}
 
 
   <div className="inputSection">

@@ -37,6 +37,7 @@ def upload_data():
     api_key = "KEYHERE"
     go = True
     i = 0
+    latest_file = ""
     while go:
         file = request.files.get("file"+str(i))
         if file != None:
@@ -45,11 +46,12 @@ def upload_data():
             file.save(os.path.join(uploads_dir, file.filename))
             filepath = os.path.join(uploads_dir, file.filename)
             UploadFile(filepath, api_key)
+            latest_file = file.filename
         else:
             go = False
            
    
-    return jsonify({"reponse": "Files Uploaded"})
+    return jsonify({"response": latest_file})
 
 @app.route("/api/login", methods=['POST'])
 def check_login():
