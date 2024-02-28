@@ -23,6 +23,9 @@ const Login = ({ onLogin, message, counter }) => {
   const [signupDisabled, setSignupDisabled] = useState(true);
   const [signinDisabled, setSigninDisabled] = useState(false);
 
+  const [text1, setText1] = useState("New to Second Brain?");
+  const [text2, setText2] = useState("Click Register Now!");
+
 
 
 
@@ -122,9 +125,12 @@ const Login = ({ onLogin, message, counter }) => {
             else {
                 console.log("Account registered")
                 setIsRegistered(!isRegistered);
+                handleSigninClick();
                 setPassCheck('');
                 setConfirmPassword('');
-            }
+                setText1("Account Created Successfully!");
+                setText2("Welcome to Second Brain, " + username + "!");
+          }
             
           } catch (error) {
             console.error('Error submitting input:', error);
@@ -178,8 +184,8 @@ const Login = ({ onLogin, message, counter }) => {
                 
                 <button className='main_btn' onClick={handleLogin}>Login</button>
 
-                <h2 className='text'>New to Second Brain? </h2>
-                <h2 className='text'>Click Register Now! </h2>
+                <h2 className='text'>{text1}</h2>
+                <h2 className='text'>{text2}</h2>
                 
               </>
             )}
