@@ -1,21 +1,28 @@
 from pinecone import Pinecone
 from langchain_openai import OpenAIEmbeddings
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+PINECONE_DOCDATA_API_KEY = os.getenv("PINECONE_DOCDATA_API_KEY")
+PINECONE_LOGIN_API_KEY = os.getenv("PINECONE_LOGIN_API_KEY")
 
 def register(username, password):
-    pc = Pinecone(api_key='ec87c2c6-6c1f-4d66-a70a-031ff0ee3eef')  # create a Pinecone instance
+    pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
     pinecone_index = pc.Index("login-info")   
     api_key = "KEYHERE"
-    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
     pinecone_index.upsert(vectors=[{"id": username, "values": embedded_username, "metadata": {"password": password, "pinecone_account": "unique id"}}])
     print(username + " is registered in the pincone db")
 
 
 def getClosestUserInfo(username):
-    pc = Pinecone(api_key='ec87c2c6-6c1f-4d66-a70a-031ff0ee3eef')  # create a Pinecone instance
+    pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
     pinecone_index = pc.Index("login-info")   
     api_key = "KEYHERE"
-    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
 
     return_vectors = pinecone_index.query(

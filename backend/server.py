@@ -27,14 +27,13 @@ def submit_data():
     # Process the file as needed (e.g., save it to a folder)
 
     api_key = "KEYHERE"  # insert your own key
-    relevant_section,answer = GetResponse(query, api_key)  # see storeAndSearch.py for more details
+    relevant_section,answer = GetResponse(query)  # see storeAndSearch.py for more details
     print(relevant_section)
     return jsonify({"relevantSection": relevant_section, "answer": answer})  # send this info to the frontend
    
 
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
-    api_key = "KEYHERE"
     go = True
     i = 0
     latest_file = ""
@@ -45,7 +44,7 @@ def upload_data():
             print(file)
             file.save(os.path.join(uploads_dir, file.filename))
             filepath = os.path.join(uploads_dir, file.filename)
-            UploadFile(filepath, api_key)
+            UploadFile(filepath)
             latest_file = file.filename
         else:
             go = False
