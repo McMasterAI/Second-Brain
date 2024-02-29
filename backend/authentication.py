@@ -10,8 +10,8 @@ PINECONE_LOGIN_API_KEY = os.getenv("PINECONE_LOGIN_API_KEY")
 
 def register(username, password):
     pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
-    pinecone_index = pc.Index("login-info")   
-    api_key = "KEYHERE"
+    pinecone_index = pc.Index("login-info")
+    # api_key = "KEYHERE"
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
     pinecone_index.upsert(vectors=[{"id": username, "values": embedded_username, "metadata": {"password": password, "pinecone_account": "unique id"}}])
@@ -21,7 +21,7 @@ def register(username, password):
 def getClosestUserInfo(username):
     pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
     pinecone_index = pc.Index("login-info")   
-    api_key = "KEYHERE"
+    # api_key = "KEYHERE"
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
 

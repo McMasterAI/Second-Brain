@@ -18,7 +18,7 @@ PINECONE_LOGIN_API_KEY = os.getenv("PINECONE_LOGIN_API_KEY")
 
 # filepath = os.path.join("uploads/f2.docx")
 pc = Pinecone(api_key=PINECONE_DOCDATA_API_KEY)  # create a Pinecone instance
-pinecone_index = pc.Index("test1000")
+pinecone_index = pc.Index("test1001")
 
 
 
@@ -43,14 +43,16 @@ def UploadFile(filepath):
     
     # Load the content of the file
     file_content = loader.load()
-    page_content = file_content[0].page_content
+    for i in range(len(file_content)):
+        page_content = file_content[i].page_content
 
-    # Preprocess the text content (replace newline characters, remove non-alphanumeric characters, and convert to lowercase)
-    page_content = page_content.replace('\n', ' ')
-    page_content = re.sub(r'[^a-zA-Z0-9\s]', '', page_content).lower()
+        # Preprocess the text content (replace newline characters, remove non-alphanumeric characters, and convert to lowercase)
+        page_content = page_content.replace('\n', ' ')
+        page_content = re.sub(r'[^a-zA-Z0-9\s]', '', page_content).lower()
+        print(page_content)
 
-    # Update the page content with preprocessed content
-    file_content[0].page_content = page_content
+        # Update the page content with preprocessed content
+        file_content[i].page_content = page_content
 
     # Split the text content into chunks for processing
     text_splitter = CharacterTextSplitter(chunk_size=250, chunk_overlap=20, separator=" ")
@@ -67,6 +69,7 @@ def UploadFile(filepath):
 
     # Upsert embedded vectors into Pinecone index
     for i, doc in enumerate(docs):
+        print(docs[i])
         pinecone_index.upsert(vectors=[{"id": str(i), "values": embedded_docs[i], "metadata": {"text_chunk": docs[i].page_content}}])
 
     # Return a success message
