@@ -119,5 +119,3 @@ def GetResponse(query):
 
     # Return the context text chunk and the generated response
     return gpt_send, send_back
-
-print(GetResponse(query="what is the mcmasters student union"))
