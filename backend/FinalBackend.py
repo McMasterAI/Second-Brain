@@ -65,7 +65,7 @@ def UploadFile(filepath,api_key):
         pinecone_index.upsert(vectors=[{"id": str(i), "values": embedded_docs[i], "metadata": {"text_chunk": docs[i].page_content}}])
 
     #this returns the title you dont actually need to send this back to frontend
-    return docs[0].page_content
+    return "Succesfully Uploaded"
 
 
 

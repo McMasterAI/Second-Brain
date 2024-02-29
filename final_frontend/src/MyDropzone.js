@@ -1,11 +1,18 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import './MyDropzone.css'
 
-const MyDropzone= ({ onSubmit }) => {
+const MyDropzone= ({ response, onSubmit }) => {
 
   const [files, setFiles] = useState([])
   const [selectedFile, setSelectedFile] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [classNameVar, setClassNameVar] = useState("dragAndDrop");
+
+  useEffect(() => {
+    setLoading(false);
+    console.log(response);
+  }, [response]);
 
   const onDrop = useCallback(acceptedFiles => {
     
@@ -31,9 +38,20 @@ const MyDropzone= ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
+
     onSubmit(files);
-    setFiles([])
+    
+    setFiles([]);
   }
+
+  useEffect(() => {
+    if (isDragActive) {
+      setClassNameVar("dragAndDropHover");
+    } else {
+      setClassNameVar("dragAndDrop");
+    }
+  }, [isDragActive]);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -41,7 +59,7 @@ const MyDropzone= ({ onSubmit }) => {
 
   return (
       <form onSubmit={handleSubmit}>
-        <div  className="dragAndDrop" {...getRootProps()}>
+        <div  className={classNameVar} {...getRootProps()}>
           <input {...getInputProps()} />
           {
             isDragActive ?
@@ -66,9 +84,14 @@ const MyDropzone= ({ onSubmit }) => {
         </ul>
       </div>
 
+      {loading ? (
+        <div className="spinner3"></div>
+      ) : (
         <div className='Upload_div'>
         <button onSubmit={handleFileChange}  className ="Upload_btn" type="submit">Upload Files</button>
         </div>
+      )}
+        
 
       </form>
       
