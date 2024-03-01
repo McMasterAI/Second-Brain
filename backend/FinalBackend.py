@@ -16,13 +16,11 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 PINECONE_DOCDATA_API_KEY = os.getenv("PINECONE_DOCDATA_API_KEY")
 PINECONE_LOGIN_API_KEY = os.getenv("PINECONE_LOGIN_API_KEY")
 
-# filepath = os.path.join("uploads/f2.docx")
 pc = Pinecone(api_key=PINECONE_DOCDATA_API_KEY)  # create a Pinecone instance
-pinecone_index = pc.Index("test1001")
 
-
-
-def UploadFile(filepath):
+def UploadFile(filepath,index_name):
+    pinecone_index = pc.Index(index_name)
+    print("THIS IS INDEX NAME! ", index_name)
     """
     Uploads a file for processing and indexing.
 
@@ -55,7 +53,7 @@ def UploadFile(filepath):
         file_content[i].page_content = page_content
 
     # Split the text content into chunks for processing
-    text_splitter = CharacterTextSplitter(chunk_size=250, chunk_overlap=20, separator=" ")
+    text_splitter = CharacterTextSplitter(chunk_size=400, chunk_overlap=20, separator=" ")
     docs = text_splitter.split_documents(file_content)
 
     # Initialize OpenAI Embeddings service
@@ -76,7 +74,9 @@ def UploadFile(filepath):
     return "Successfully Uploaded"
 
 
-def GetResponse(query):
+def GetResponse(query,index_name):
+    pinecone_index = pc.Index(index_name)
+
     """
     Generates a response to a query using OpenAI's GPT model based on matching text chunks.
 
