@@ -53,7 +53,7 @@ def UploadFile(filepath,index_name):
         file_content[i].page_content = page_content
 
     # Split the text content into chunks for processing
-    text_splitter = CharacterTextSplitter(chunk_size=400, chunk_overlap=20, separator=" ")
+    text_splitter = CharacterTextSplitter(chunk_size=500, chunk_overlap=20, separator=" ")
     docs = text_splitter.split_documents(file_content)
 
     # Initialize OpenAI Embeddings service
