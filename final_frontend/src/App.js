@@ -35,6 +35,10 @@ const App = ({ onLogout }) => {
     try {
       const formData = new FormData();
       formData.append('inputValue', userInput);
+      const token = localStorage.getItem('authToken');
+      formData.append('username', token);
+
+
 
 
       const response = await axios.post("http://127.0.0.1:5000/api/submit", formData, {
@@ -63,6 +67,8 @@ const App = ({ onLogout }) => {
     try {
       const formData2 = new FormData();
       console.log(files)
+      const token = localStorage.getItem('authToken');
+      formData2.append('username', token);
  
  
       files.forEach((file, index) => {

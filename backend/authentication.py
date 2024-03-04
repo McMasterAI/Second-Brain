@@ -1,4 +1,4 @@
-from pinecone import Pinecone
+from pinecone import Pinecone, ServerlessSpec
 from langchain_openai import OpenAIEmbeddings
 import os
 from dotenv import load_dotenv
@@ -11,9 +11,26 @@ PINECONE_LOGIN_API_KEY = os.getenv("PINECONE_LOGIN_API_KEY")
 def register(username, password):
     pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
     pinecone_index = pc.Index("login-info")
+
     # api_key = "KEYHERE"
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
+
+    # creates a new index named the users username 
+    # this is their unique server to upload to
+    index_name = username
+    if index_name not in pc.list_indexes().names():
+    # Do something, such as create the index
+        pc.create_index(
+            name=index_name,
+            dimension=1536,
+            metric='cosine',
+            spec=ServerlessSpec(
+                cloud="aws",
+                region="us-west-2"
+            )
+        )
+
     pinecone_index.upsert(vectors=[{"id": username, "values": embedded_username, "metadata": {"password": password, "pinecone_account": "unique id"}}])
     print(username + " is registered in the pincone db")
 
@@ -21,7 +38,13 @@ def register(username, password):
 def getClosestUserInfo(username):
     pc = Pinecone(api_key=PINECONE_LOGIN_API_KEY)  # create a Pinecone instance
     pinecone_index = pc.Index("login-info")   
-    # api_key = "KEYHERE"
+
+    #uploading a first user
+    # embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+    # embedded_username = embeddings.embed_query("Admin")
+    # pinecone_index.upsert(vectors=[{"id": "Admin", "values": embedded_username, "metadata": {"password": "Admin", "pinecone_account": "unique id"}}])
+    #end 
+
     embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     embedded_username = embeddings.embed_query(username)
 

@@ -19,21 +19,27 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})  # Enable
 uploads_dir = os.path.join('uploads')  # making the 'uploads' directory to store documents
 os.makedirs(uploads_dir, exist_ok=True)
 
+# username = ""
+
 @app.route("/api/submit", methods=['POST'])
 def submit_data():
     query = request.form.get('inputValue')
+    username = request.form.get('username').lower()
+
     print(query)
 
     # Process the file as needed (e.g., save it to a folder)
 
-    api_key = "KEYHERE"  # insert your own key
-    relevant_section,answer = GetResponse(query)  # see storeAndSearch.py for more details
+    print("THIS IS USER",username)
+
+    relevant_section,answer = GetResponse(query,username)  # see storeAndSearch.py for more details
     print(relevant_section)
     return jsonify({"relevantSection": relevant_section, "answer": answer})  # send this info to the frontend
    
 
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
+    username = request.form.get('username').lower()
     go = True
     i = 0
     latest_file = ""
@@ -44,17 +50,21 @@ def upload_data():
             print(file)
             file.save(os.path.join(uploads_dir, file.filename))
             filepath = os.path.join(uploads_dir, file.filename)
-            UploadFile(filepath)
+            #get username
+            
+            print("THIS IS USER for upload",username)
+            UploadFile(filepath,username)
             latest_file = file.filename
         else:
             go = False
-           
-   
+ 
+
     return jsonify({"response": latest_file})
 
 @app.route("/api/login", methods=['POST'])
 def check_login():
-    username = request.form.get('username')
+    # global username
+    username = request.form.get('username').lower()
     password = request.form.get('password')
     print(username, password)
     existing, account = checkLoginInfo(username, password)
@@ -66,7 +76,8 @@ def check_login():
 
 @app.route("/api/register", methods=['POST'])
 def register_user():
-    username = request.form.get('username')
+    # global username
+    username = request.form.get('username').lower()
     password = request.form.get('password')
     print(username, password)
     existing = checkExisting(username)
