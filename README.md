@@ -4,7 +4,7 @@ Our project  team of 7 created a website called SecondBrain that allows users to
 ## Technologies
 We utilized technologies such as GPT-4, vectorization, vector databases, LangChain, and Similarity Search through API integration.
 
-## In-Depth Process 
+## Process 
 Step 1: The user uploads a document in Pdf or Docx format.<br>
 Step 2: We use LangChain to turn the document data into plain text and remove all special characters.<br>
 Step 3: We cut up the text into chunk sizes of 500 (about one paragraph) and vectorize the data using GPT embeddings.<br>
