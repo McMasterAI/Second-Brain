@@ -12,4 +12,4 @@ Step 4: The vectorized paragraphs are uploaded to the unique user's vector datab
 Step 5: When the user asks a question we vectorize the question and perform a similarity search with the question and database to return the most similar paragraph.<br>
 Step 6: The un-vectorized question and paragraph are sent to GPT-4 to ensure a clear answer.<br>
 Step 7: The user receives the relevant section (the paragraph) along with the clear answer from GPT-4.<be>
-![Process](Images/Process.png)
+<img src="Image/Process.png" alt="Process" width="300" height="200">
