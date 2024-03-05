@@ -13,3 +13,5 @@ Step 5: When the user asks a question we vectorize the question and perform a si
 Step 6: The un-vectorized question and paragraph are sent to GPT-4 to ensure a clear answer.<br>
 Step 7: The user receives the relevant section (the paragraph) along with the clear answer from GPT-4.<be>
 <img src="Images/Process.png" alt="Process" width="300" height="200">
+<img src="Images/MainPage.png" alt="MainPage" width="300" height="200">
+
