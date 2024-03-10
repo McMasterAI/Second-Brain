@@ -19,14 +19,13 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})  # Enable
 uploads_dir = os.path.join('uploads')  # making the 'uploads' directory to store documents
 os.makedirs(uploads_dir, exist_ok=True)
 
-# username = ""
 
+# FLASK ROUTES
 @app.route("/api/submit", methods=['POST'])
 def submit_data():
+    # get variables
     query = request.form.get('inputValue')
     username = request.form.get('username').lower()
-
-    print(query)
 
     # Process the file as needed (e.g., save it to a folder)
 
@@ -40,6 +39,14 @@ def submit_data():
 @app.route("/api/upload", methods=['POST'])
 def upload_data():
     username = request.form.get('username').lower()
+
+    '''
+    Users are able to upload multiple files at a time.
+    Each additional file a user uploads, with have a unique json key.
+    Each request starts with file1, followed by file2, file3, etc.
+    Therefore we go through an infinite loop until the we attempt to access a json key that doesn't exist
+    For example, if the user uploads 2 files, accessing the json key "file3" returns None and the loop will terminate
+    '''
     go = True
     i = 0
     latest_file = ""
@@ -50,7 +57,6 @@ def upload_data():
             print(file)
             file.save(os.path.join(uploads_dir, file.filename))
             filepath = os.path.join(uploads_dir, file.filename)
-            #get username
             
             print("THIS IS USER for upload",username)
             UploadFile(filepath,username)
@@ -59,17 +65,17 @@ def upload_data():
             go = False
  
 
-    return jsonify({"response": latest_file})
+    return jsonify({"response": latest_file}) # latest_file is returned, so that frontend is always receiving a unique update from the backend. If the same response is sent, the frontend will not process that the upload went through
 
 @app.route("/api/login", methods=['POST'])
 def check_login():
-    # global username
     username = request.form.get('username').lower()
     password = request.form.get('password')
     print(username, password)
-    existing, account = checkLoginInfo(username, password)
+
+    existing, account = checkLoginInfo(username, password) # see more in authentication.py
     if (existing == "success"):
-        # do something with the account variable (save it for later)
+        # logs in the users
         pass
     print(existing)
     return jsonify({"message": existing})
@@ -86,6 +92,7 @@ def register_user():
     return jsonify({"message": existing})
 
 
+# RUNS THE FLASK APP
 if __name__ == '__main__':
     app.run(debug=True)
     

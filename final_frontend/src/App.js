@@ -20,15 +20,10 @@ const App = ({ onLogout }) => {
     const timeout = setTimeout(() => {
      
     }, 1000);
-
     // Clear timeout to prevent memory leaks
     return () => clearTimeout(timeout);
   }, []);
 
-
-
-
- 
 
   const handleFormSubmit = async () => {
     setLoading(true); // Set loading state to true when fetching data
@@ -37,9 +32,6 @@ const App = ({ onLogout }) => {
       formData.append('inputValue', userInput);
       const token = localStorage.getItem('authToken');
       formData.append('username', token);
-
-
-
 
       const response = await axios.post("http://127.0.0.1:5000/api/submit", formData, {
         headers: {
@@ -59,11 +51,8 @@ const App = ({ onLogout }) => {
     }
   };
 
-  
-
-
   const handleUpload = async (files) => {
- 
+
     try {
       const formData2 = new FormData();
       console.log(files)
@@ -73,7 +62,7 @@ const App = ({ onLogout }) => {
  
       files.forEach((file, index) => {
         console.log(file);
-        formData2.append(`file${index}`, file); // Appending each file individually
+        formData2.append(`file${index}`, file); // Appending each file individually with a unique json key (file1, file2, ..., filex)
       });
  
       const response1 = await axios.post("http://127.0.0.1:5000/api/upload", formData2, {

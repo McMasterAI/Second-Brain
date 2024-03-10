@@ -56,7 +56,8 @@ def getClosestUserInfo(username):
 
     metadata_list = []
     closest_username = ""
-    for i, match in enumerate(return_vectors['matches']):
+    # from all vectors returned from pinecone db, we will get the value of the closest to the username
+    for i, match in enumerate(return_vectors['matches']): 
         vector_id_to_fetch = match['id']
         closest_username = vector_id_to_fetch
         metadata_result = pinecone_index.fetch([vector_id_to_fetch])
@@ -73,9 +74,9 @@ def checkExisting(username):
     closest_username, closest_password, account = getClosestUserInfo(username)
 
     if (username == closest_username):
-        return "username_error"
+        return "username_error" # username already exists in the db
     else:
-        return "success"
+        return "success" # username does not exist, and new account can be created
         
 
 def checkLoginInfo(username, password):
