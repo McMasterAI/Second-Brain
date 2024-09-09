@@ -112,7 +112,7 @@ def GetResponse(query,index_name):
     openai.api_key = OPENAI_API_KEY
 
     # Generate response using GPT model
-    completion = openai.chat.completions.create(model="gpt-4-0125-preview",
+    completion = openai.chat.completions.create(model="gpt-4o",
         messages=[
         {"role": "user", "content": "Based on this background information ONLY: " + gpt_send + "ONLY use that background information word for word to answer this question: " + query}
     ])
