@@ -1,6 +1,6 @@
 import './App.css';
 import Login from './Login';
-import App from './App';// Assuming you have a MainApp component for your main application
+import App from './App';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -20,8 +20,6 @@ const Autheticator = () => {
 
 
   const handleLogin = async (username, password, counter) => {
-    // Implement your authentication logic here
-    // For demonstration, let's assume any username/password is valid
 
     try {
         const formData = new FormData();
